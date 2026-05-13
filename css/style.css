@@ -347,6 +347,22 @@ button { cursor: pointer; font-family: inherit; }
   line-height: 1.6;
 }
 
+.form-privacy-note {
+  margin-top: 12px;
+  text-align: center;
+  font-size: 12px;
+}
+
+.form-privacy-note a {
+  color: var(--color-text-light);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.form-privacy-note a:hover {
+  color: var(--color-accent);
+}
+
 /* ===================================================
    質問画面
 =================================================== */
