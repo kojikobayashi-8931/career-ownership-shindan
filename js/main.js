@@ -619,6 +619,12 @@ function updateProgressNav(activeArea) {
 
 /** ステップを描画 */
 function renderStep() {
+  // ナビゲーション時刻を記録（iOS ゴーストクリック対策）
+  lastNavigationTime = Date.now();
+
+  // 回答ボタンの選択状態を即時クリア
+  document.querySelectorAll('.answer-btn').forEach((btn) => btn.classList.remove('is-selected'));
+
   const step = getCurrentStep();
   const area = getAreaForStep(state.currentStep);
 
@@ -676,7 +682,7 @@ function renderQuantCard(step) {
   // 次へボタンを定量カード用に設定
   const btnNext = document.getElementById('btn-next');
   btnNext.hidden = false;
-  btnNext.textContent = '入力して次へ →';
+  btnNext.textContent = '次へ →';
   btnNext.disabled = false;
 
   const body = document.getElementById('quantitative-body');
@@ -771,9 +777,13 @@ function goPrev() {
 }
 
 let autoAdvanceTimer = null;
+let lastNavigationTime = 0;
 
 /** 回答ボタンクリック */
 function onAnswerClick(value) {
+  // iOS ゴーストクリック対策：ナビゲーション直後 200ms 以内は無視
+  if (Date.now() - lastNavigationTime < 200) return;
+
   const step = getCurrentStep();
   if (step.type !== 'question') return;
 
