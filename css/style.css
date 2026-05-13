@@ -155,8 +155,11 @@ button { cursor: pointer; font-family: inherit; }
 .btn--ghost:hover { background: var(--color-bg); color: var(--color-text); }
 
 .btn--large { padding: 16px 32px; font-size: 17px; border-radius: var(--radius-lg); }
+.btn--sm { padding: 8px 16px; font-size: 13px; }
 .btn--block { width: 100%; display: flex; }
 .btn--icon-left { padding-left: 16px; }
+
+.btn--secondary:disabled { background: var(--color-bg); color: #B0BEC5; border-color: #D0D9E3; cursor: not-allowed; }
 
 /* ===================================================
    トップ画面
