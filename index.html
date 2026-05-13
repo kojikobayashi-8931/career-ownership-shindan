@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>キャリアオーナーシップ診断 | NODIA</title>
+  <meta name="description" content="自社のキャリアオーナーシップ推進環境を診断します。経営・制度・文化・管理職支援の観点から現在地を把握し、次のステップを見つけてください。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ヘッダー -->
+  <header class="site-header">
+    <div class="site-header__inner">
+      <img src="logo.png" alt="NODIA" class="site-header__logo">
+    </div>
+  </header>
+
+  <!-- ==================== トップ画面 ==================== -->
+  <section id="screen-top" class="screen screen--active" data-screen="top">
+    <div class="screen__inner screen__inner--narrow">
+
+      <div class="top-hero">
+        <div class="top-hero__badge">無料診断ツール</div>
+        <h1 class="top-hero__title">キャリアオーナーシップ診断</h1>
+        <p class="top-hero__subtitle">自社の「キャリアオーナーシップ推進環境」を客観的に把握する、人事担当者向け診断です。</p>
+      </div>
+
+      <div class="top-about">
+        <div class="top-about__item">
+          <span class="top-about__icon">📋</span>
+          <div>
+            <strong>26問＋参考データ入力</strong>
+            <p>経営・管理職・組織風土・制度・個人行動・データ把握の6領域を測定します</p>
+          </div>
+        </div>
+        <div class="top-about__item">
+          <span class="top-about__icon">⏱</span>
+          <div>
+            <strong>所要時間：約10〜15分</strong>
+            <p>参考データ入力（任意）を含む場合、最大20分程度となります</p>
+          </div>
+        </div>
+        <div class="top-about__item">
+          <span class="top-about__icon">📊</span>
+          <div>
+            <strong>診断後すぐに結果を表示</strong>
+            <p>スコア・段階・領域別レーダーチャート・NODIAからの提言をその場でご確認いただけます</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-card">
+        <h2 class="form-card__title">基本情報の入力</h2>
+        <p class="form-card__note">
+          <span class="required-badge">必須</span>のついた項目は必ずご入力ください。
+        </p>
+
+        <form id="form-basic-info" class="basic-form" novalidate>
+
+          <div class="form-field">
+            <label class="form-field__label" for="field-name">
+              お名前<span class="required-badge">必須</span>
+            </label>
+            <input
+              type="text"
+              id="field-name"
+              data-field="name"
+              class="form-field__input"
+              placeholder="例：山田 太郎"
+              autocomplete="name"
+            >
+            <p class="form-field__error" data-error="name"></p>
+          </div>
+
+          <div class="form-field">
+            <label class="form-field__label" for="field-email">
+              メールアドレス<span class="required-badge">必須</span>
+            </label>
+            <input
+              type="email"
+              id="field-email"
+              data-field="email"
+              class="form-field__input"
+              placeholder="例：yamada@example.com"
+              autocomplete="email"
+            >
+            <p class="form-field__error" data-error="email"></p>
+          </div>
+
+          <div class="form-field">
+            <label class="form-field__label" for="field-job">
+              あなたの職種<span class="required-badge">必須</span>
+            </label>
+            <div class="form-field__select-wrapper">
+              <select id="field-job" data-field="job" class="form-field__select">
+                <option value="">選択してください</option>
+                <option value="人事・HR">人事・HR</option>
+                <option value="採用担当">採用担当</option>
+                <option value="人材開発・育成">人材開発・育成</option>
+                <option value="組織開発">組織開発</option>
+                <option value="総務">総務</option>
+                <option value="経営企画">経営企画</option>
+                <option value="経営層・役員">経営層・役員</option>
+                <option value="その他">その他</option>
+              </select>
+            </div>
+            <p class="form-field__error" data-error="job"></p>
+          </div>
+
+          <div class="form-field">
+            <label class="form-field__label" for="field-industry">
+              業界<span class="required-badge">必須</span>
+            </label>
+            <div class="form-field__select-wrapper">
+              <select id="field-industry" data-field="industry" class="form-field__select">
+                <option value="">選択してください</option>
+                <option value="IT・テクノロジー">IT・テクノロジー</option>
+                <option value="製造業">製造業</option>
+                <option value="金融・保険">金融・保険</option>
+                <option value="医療・ヘルスケア">医療・ヘルスケア</option>
+                <option value="小売・流通">小売・流通</option>
+                <option value="不動産・建設">不動産・建設</option>
+                <option value="教育">教育</option>
+                <option value="サービス業">サービス業</option>
+                <option value="コンサルティング">コンサルティング</option>
+                <option value="公共・行政">公共・行政</option>
+                <option value="その他">その他</option>
+              </select>
+            </div>
+            <p class="form-field__error" data-error="industry"></p>
+          </div>
+
+          <div class="form-field">
+            <label class="form-field__label" for="field-size">
+              従業員数<span class="required-badge">必須</span>
+            </label>
+            <div class="form-field__select-wrapper">
+              <select id="field-size" data-field="size" class="form-field__select">
+                <option value="">選択してください</option>
+                <option value="100名未満">100名未満</option>
+                <option value="100〜299名">100〜299名</option>
+                <option value="300〜499名">300〜499名</option>
+                <option value="500〜999名">500〜999名</option>
+                <option value="1,000〜2,999名">1,000〜2,999名</option>
+                <option value="3,000〜9,999名">3,000〜9,999名</option>
+                <option value="10,000名以上">10,000名以上</option>
+              </select>
+            </div>
+            <p class="form-field__error" data-error="size"></p>
+          </div>
+
+          <div class="form-field">
+            <label class="form-field__label" for="field-company">
+              在籍企業名
+              <span class="optional-badge">任意</span>
+            </label>
+            <input
+              type="text"
+              id="field-company"
+              data-field="company"
+              class="form-field__input"
+              placeholder="例：株式会社〇〇"
+              autocomplete="organization"
+            >
+          </div>
+
+          <button type="submit" id="btn-start" class="btn btn--primary btn--large btn--block" disabled>
+            診断を開始する
+          </button>
+
+        </form>
+      </div>
+
+      <p class="top-privacy">
+        入力いただいた情報は、診断結果の提供およびNODIAからのご連絡に使用します。第三者への提供はいたしません。
+      </p>
+
+    </div>
+  </section>
+
+  <!-- ==================== 質問画面 ==================== -->
+  <section id="screen-question" class="screen" data-screen="question">
+    <div class="screen__inner screen__inner--question">
+
+      <!-- プログレスバー（領域単位） -->
+      <nav class="progress-nav" aria-label="診断の進捗">
+        <ol class="progress-nav__list" id="progress-list">
+          <li class="progress-nav__item" data-area="leadership">
+            <span class="progress-nav__dot"></span>
+            <span class="progress-nav__label">経営・宣言</span>
+          </li>
+          <li class="progress-nav__item" data-area="manager">
+            <span class="progress-nav__dot"></span>
+            <span class="progress-nav__label">管理職支援</span>
+          </li>
+          <li class="progress-nav__item" data-area="culture">
+            <span class="progress-nav__dot"></span>
+            <span class="progress-nav__label">組織風土</span>
+          </li>
+          <li class="progress-nav__item" data-area="system">
+            <span class="progress-nav__dot"></span>
+            <span class="progress-nav__label">制度設計</span>
+          </li>
+          <li class="progress-nav__item" data-area="individual">
+            <span class="progress-nav__dot"></span>
+            <span class="progress-nav__label">個人行動</span>
+          </li>
+          <li class="progress-nav__item" data-area="data">
+            <span class="progress-nav__dot"></span>
+            <span class="progress-nav__label">データ把握</span>
+          </li>
+        </ol>
+      </nav>
+
+      <!-- 問数カウンター -->
+      <div class="question-counter">
+        <span id="question-counter-current">1</span>
+        <span class="question-counter__sep">/</span>
+        <span id="question-counter-total">26</span>問
+      </div>
+
+      <!-- 質問カード（主観評価） -->
+      <div id="question-card" class="question-card" role="main">
+        <div class="question-card__area-label" id="q-area-label"></div>
+        <p class="question-card__text" id="q-text"></p>
+
+        <div class="answer-scale">
+          <div class="answer-scale__labels">
+            <span>全くない</span>
+            <span>十分にある</span>
+          </div>
+          <div class="answer-scale__buttons" id="answer-buttons" role="group" aria-label="回答を選択してください">
+            <button class="answer-btn" data-value="1" aria-label="1：全くない">1</button>
+            <button class="answer-btn" data-value="2" aria-label="2：ほとんどない">2</button>
+            <button class="answer-btn" data-value="3" aria-label="3：あまりない">3</button>
+            <button class="answer-btn" data-value="4" aria-label="4：ある程度ある">4</button>
+            <button class="answer-btn" data-value="5" aria-label="5：かなりある">5</button>
+            <button class="answer-btn" data-value="6" aria-label="6：十分にある">6</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 定量参考入力カード -->
+      <div id="quantitative-card" class="quantitative-card" hidden>
+        <div class="quantitative-card__badge">
+          <span>📊</span> 参考データ入力（任意・スキップ可）
+        </div>
+        <div class="quantitative-card__body" id="quantitative-body"></div>
+        <div class="quantitative-card__actions">
+          <button id="btn-skip-quant" class="btn btn--ghost">スキップして次へ →</button>
+          <button id="btn-next-quant" class="btn btn--secondary">入力して次へ →</button>
+        </div>
+      </div>
+
+      <!-- ナビゲーション -->
+      <div class="question-nav">
+        <button id="btn-prev" class="btn btn--ghost btn--icon-left" aria-label="前の質問へ">
+          ← 前へ
+        </button>
+        <button id="btn-next" class="btn btn--primary" hidden aria-label="次の質問へ">
+          次へ →
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== 結果画面 ==================== -->
+  <section id="screen-result" class="screen" data-screen="result">
+    <div class="screen__inner screen__inner--result">
+
+      <!-- スコアヒーロー -->
+      <div class="result-hero">
+        <div class="result-hero__label">総合スコア</div>
+        <div class="result-hero__score">
+          <span id="result-score-number" class="result-hero__number">--</span>
+          <span class="result-hero__unit">点</span>
+        </div>
+        <div class="result-hero__stage">
+          <span id="result-stage-level" class="result-hero__stage-level">Stage --</span>
+          <span id="result-stage-name" class="result-hero__stage-name">------</span>
+        </div>
+        <p id="result-user-name" class="result-hero__user"></p>
+      </div>
+
+      <!-- レーダーチャート -->
+      <div class="result-chart">
+        <h2 class="result-section__title">領域別スコア</h2>
+        <div class="result-chart__wrap">
+          <canvas id="radar-chart" width="360" height="360" aria-label="6領域のレーダーチャート"></canvas>
+        </div>
+        <!-- 領域別スコア一覧 -->
+        <div class="area-scores" id="area-scores-list"></div>
+      </div>
+
+      <!-- 現在地の診断 -->
+      <div class="result-section result-diagnosis">
+        <h2 class="result-section__title">現在地の診断</h2>
+        <div class="result-diagnosis__stage-label" id="diagnosis-stage-label"></div>
+        <div class="result-diagnosis__body" id="diagnosis-body"></div>
+      </div>
+
+      <!-- 強みの領域 -->
+      <div class="result-section result-strengths">
+        <h2 class="result-section__title">強みの領域</h2>
+        <div id="strengths-list" class="strengths-list"></div>
+      </div>
+
+      <!-- 優先して取り組むべき領域 -->
+      <div class="result-section result-weaknesses">
+        <h2 class="result-section__title">優先して取り組むべき領域</h2>
+        <div id="weaknesses-list" class="weaknesses-list"></div>
+      </div>
+
+      <!-- 他社比較レポート希望 -->
+      <div class="result-section result-report-request">
+        <div class="report-request-card">
+          <label class="report-request-card__label">
+            <input type="checkbox" id="report-request-check" class="report-request-card__checkbox">
+            <span class="report-request-card__check-ui"></span>
+            <span class="report-request-card__text">
+              他社比較レポートが完成した際に受け取りたい
+            </span>
+          </label>
+          <p class="report-request-card__note">
+            ※一定数のデータが蓄積された段階でNODIAよりご連絡します
+          </p>
+          <div id="report-email-wrap" class="report-request-card__email-wrap" hidden>
+            <label class="report-request-card__email-label" for="report-email">
+              受け取るメールアドレス
+            </label>
+            <input
+              type="email"
+              id="report-email"
+              class="form-field__input"
+              placeholder="メールアドレスを入力"
+            >
+            <button id="btn-request-report" class="btn btn--accent btn--block">
+              レポートを希望する
+            </button>
+            <p id="report-request-status" class="report-request-card__status"></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- アクションボタン -->
+      <div class="result-actions">
+        <button id="btn-download-pdf" class="btn btn--secondary btn--block">
+          簡易レポートをダウンロード（PDF）
+        </button>
+        <a href="https://nodia.co.jp/contact.html" target="_blank" rel="noopener" class="btn btn--primary btn--block">
+          NODIAに相談する
+        </a>
+      </div>
+
+      <!-- SNSシェア -->
+      <div class="result-share">
+        <p class="result-share__label">診断結果をシェアする</p>
+        <div class="result-share__buttons">
+          <a id="share-x" href="#" target="_blank" rel="noopener" class="share-btn share-btn--x" aria-label="Xでシェア">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.259 5.622L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+            X
+          </a>
+          <a id="share-facebook" href="#" target="_blank" rel="noopener" class="share-btn share-btn--facebook" aria-label="Facebookでシェア">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            Facebook
+          </a>
+        </div>
+      </div>
+
+      <!-- 再診断 -->
+      <div class="result-retry">
+        <button id="btn-retry" class="btn btn--ghost">
+          もう一度診断する
+        </button>
+      </div>
+
+      <p class="result-footer-note">© NODIA Co., Ltd. All Rights Reserved.</p>
+
+    </div>
+  </section>
+
+  <!-- 印刷用（非表示） -->
+  <div id="print-area" class="print-area" hidden></div>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>
