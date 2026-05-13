@@ -655,18 +655,30 @@ function renderQuestionCard(step) {
   document.getElementById('q-area-label').textContent = AREA_LABELS[step.area];
   document.getElementById('q-text').textContent = step.text;
 
-  // 選択済みの回答を復元
+  // 選択済みの回答を復元（まず全クリア）
   const saved = state.answers[step.id];
   document.querySelectorAll('.answer-btn').forEach((btn) => {
-    btn.classList.toggle('is-selected', Number(btn.dataset.value) === saved);
+    btn.classList.remove('is-selected');
+    if (saved !== undefined && Number(btn.dataset.value) === saved) {
+      btn.classList.add('is-selected');
+    }
   });
 
-  // 次へボタン（質問画面は選択後に自動進行するため隠す）
-  document.getElementById('btn-next').hidden = true;
+  // 次へボタン：回答済みなら有効、未回答なら無効で表示
+  const btnNext = document.getElementById('btn-next');
+  btnNext.hidden = false;
+  btnNext.textContent = '次へ →';
+  btnNext.disabled = saved === undefined;
 }
 
 /** 定量参考カードを描画 */
 function renderQuantCard(step) {
+  // 次へボタンを定量カード用に設定
+  const btnNext = document.getElementById('btn-next');
+  btnNext.hidden = false;
+  btnNext.textContent = '入力して次へ →';
+  btnNext.disabled = false;
+
   const body = document.getElementById('quantitative-body');
   body.innerHTML = `<h3 style="font-size:15px;font-weight:700;color:var(--color-main);margin-bottom:16px;">${step.title}</h3>`;
 
@@ -741,6 +753,7 @@ function renderQuantCard(step) {
    ステップ進行
 ============================================================ */
 function goNext() {
+  clearTimeout(autoAdvanceTimer);
   if (state.currentStep < QUESTION_FLOW.length - 1) {
     state.currentStep++;
     renderStep();
@@ -750,6 +763,7 @@ function goNext() {
 }
 
 function goPrev() {
+  clearTimeout(autoAdvanceTimer);
   if (state.currentStep > 0) {
     state.currentStep--;
     renderStep();
@@ -765,10 +779,15 @@ function onAnswerClick(value) {
 
   state.answers[step.id] = value;
 
-  // ボタンハイライト
+  // ボタンハイライト（まず全クリア）
   document.querySelectorAll('.answer-btn').forEach((btn) => {
-    btn.classList.toggle('is-selected', Number(btn.dataset.value) === value);
+    btn.classList.remove('is-selected');
+    if (Number(btn.dataset.value) === value) btn.classList.add('is-selected');
   });
+
+  // 次へボタンを有効化
+  const btnNext = document.getElementById('btn-next');
+  btnNext.disabled = false;
 
   // 500ms後に自動進行
   clearTimeout(autoAdvanceTimer);
@@ -1080,12 +1099,6 @@ function setupEventListeners() {
 
   // 定量参考：スキップ
   document.getElementById('btn-skip-quant').addEventListener('click', goNext);
-
-  // 定量参考：入力して次へ
-  document.getElementById('btn-next-quant').addEventListener('click', () => {
-    // 入力値は各inputのinputイベントで既にstate.quantDataに保存済み
-    goNext();
-  });
 
   // PDFダウンロード
   document.getElementById('btn-download-pdf').addEventListener('click', downloadPDF);
