@@ -373,10 +373,7 @@ button { cursor: pointer; font-family: inherit; }
 /* プログレスナビ */
 .progress-nav {
   margin-bottom: 20px;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  /* outline はoverflow クリップされないため上端が切れない */
-  padding: 6px 2px 4px;
+  padding: 6px 0 4px;
 }
 
 .progress-nav__list {
@@ -384,7 +381,6 @@ button { cursor: pointer; font-family: inherit; }
   align-items: center;
   list-style: none;
   gap: 0;
-  min-width: 480px;
 }
 
 .progress-nav__item {
@@ -399,9 +395,9 @@ button { cursor: pointer; font-family: inherit; }
 .progress-nav__item:not(:last-child)::after {
   content: '';
   position: absolute;
-  top: 11px;
-  left: calc(50% + 11px);
-  right: calc(-50% + 11px);
+  top: 9px;
+  left: calc(50% + 9px);
+  right: calc(-50% + 9px);
   height: 2px;
   background: var(--color-border);
   z-index: 0;
@@ -414,12 +410,11 @@ button { cursor: pointer; font-family: inherit; }
 }
 
 .progress-nav__dot {
-  width: 22px;
-  height: 22px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
   background: var(--color-border);
   border: 2px solid var(--color-base);
-  /* outline はoverflow でクリップされないため上端が切れない */
   outline: 2px solid var(--color-border);
   outline-offset: 0;
   position: relative;
@@ -443,13 +438,13 @@ button { cursor: pointer; font-family: inherit; }
 
 .progress-nav__item.is-done .progress-nav__dot::after {
   content: '✓';
-  font-size: 11px;
+  font-size: 9px;
   color: white;
   font-weight: 700;
 }
 
 .progress-nav__label {
-  font-size: 10px;
+  font-size: 9px;
   color: var(--color-text-light);
   text-align: center;
   white-space: nowrap;
@@ -1108,6 +1103,16 @@ button { cursor: pointer; font-family: inherit; }
 
 @media (min-width: 768px) {
   .progress-nav__label { font-size: 11px; }
+
+  .progress-nav__dot { width: 22px; height: 22px; }
+
+  .progress-nav__item:not(:last-child)::after {
+    top: 11px;
+    left: calc(50% + 11px);
+    right: calc(-50% + 11px);
+  }
+
+  .progress-nav__item.is-done .progress-nav__dot::after { font-size: 11px; }
 
   .site-header { padding: 14px 32px; }
 
