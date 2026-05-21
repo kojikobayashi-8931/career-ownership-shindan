@@ -91,24 +91,67 @@
             <p class="form-field__error" data-error="email"></p>
           </div>
 
-          <div class="form-field">
-            <label class="form-field__label" for="field-job">
-              あなたの職種<span class="required-badge">必須</span>
+          <!-- 職種：4階層連動プルダウン -->
+          <div class="form-field" id="field-careerArea-wrap">
+            <label class="form-field__label" for="field-careerArea">
+              キャリア領域<span class="required-badge">必須</span>
             </label>
             <div class="form-field__select-wrapper">
-              <select id="field-job" data-field="job" class="form-field__select">
+              <select id="field-careerArea" data-field="careerArea" class="form-field__select">
                 <option value="">選択してください</option>
-                <option value="人事・HR">人事・HR</option>
-                <option value="採用担当">採用担当</option>
-                <option value="人材開発・育成">人材開発・育成</option>
-                <option value="組織開発">組織開発</option>
-                <option value="総務">総務</option>
-                <option value="経営企画">経営企画</option>
-                <option value="経営層・役員">経営層・役員</option>
-                <option value="その他">その他</option>
               </select>
             </div>
-            <p class="form-field__error" data-error="job"></p>
+            <p class="form-field__error" data-error="careerArea"></p>
+          </div>
+
+          <div class="form-field" id="field-occupationGroup-wrap" hidden>
+            <label class="form-field__label" for="field-occupationGroup">
+              職種グループ<span class="required-badge">必須</span>
+            </label>
+            <div class="form-field__select-wrapper">
+              <select id="field-occupationGroup" data-field="occupationGroup" class="form-field__select">
+                <option value="">選択してください</option>
+              </select>
+            </div>
+            <p class="form-field__error" data-error="occupationGroup"></p>
+          </div>
+
+          <div class="form-field" id="field-occupation-wrap" hidden>
+            <label class="form-field__label" for="field-occupation">
+              職種<span class="required-badge">必須</span>
+            </label>
+            <div class="form-field__select-wrapper">
+              <select id="field-occupation" data-field="occupation" class="form-field__select">
+                <option value="">選択してください</option>
+              </select>
+            </div>
+            <p class="form-field__error" data-error="occupation"></p>
+          </div>
+
+          <div class="form-field" id="field-specializedOccupation-wrap" hidden>
+            <label class="form-field__label" for="field-specializedOccupation">
+              専門職種<span class="required-badge">必須</span>
+            </label>
+            <div class="form-field__select-wrapper">
+              <select id="field-specializedOccupation" data-field="specializedOccupation" class="form-field__select">
+                <option value="">選択してください</option>
+              </select>
+            </div>
+            <p class="form-field__error" data-error="specializedOccupation"></p>
+          </div>
+
+          <div class="form-field" id="field-jobFreeword-wrap" hidden>
+            <label class="form-field__label" for="field-jobFreeword">
+              職種（フリーワード）<span class="required-badge">必須</span>
+            </label>
+            <input
+              type="text"
+              id="field-jobFreeword"
+              data-field="jobFreeword"
+              class="form-field__input"
+              placeholder="例：人事企画マネージャー"
+            >
+            <p class="form-field__error" data-error="jobFreeword"></p>
           </div>
 
           <div class="form-field">

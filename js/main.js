@@ -7,7 +7,7 @@
    GAS エンドポイント設定
    ※ GASをデプロイ後、以下URLを実際のエンドポイントに変更してください
 ============================================================ */
-const GAS_ENDPOINT = 'https://script.google.com/macros/s/YOUR_GAS_DEPLOYMENT_ID/exec';
+const GAS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxfwggSq-hS-9qFLbPZ9tFkILZi8xVLNVg6R-nIW8BVzDKPd51y-7-lS5fAek0dKy_d/exec';
 
 /* ============================================================
    定数定義
@@ -35,6 +35,211 @@ const AREA_WEIGHTS = {
 
 /** 領域の優先順位（同スコア時の判定に使用） */
 const AREA_PRIORITY = ['leadership', 'manager', 'culture', 'system', 'individual', 'data'];
+
+/* ============================================================
+   職種タクソノミー定義
+============================================================ */
+const OCCUPATION_TAXONOMY = [
+  { careerAreaId:"CA01",careerArea:"IT・テクノロジー",occupationGroupId:"OG01",occupationGroup:"ソフトウェア・システム開発",occupationId:"OC01",occupation:"Webエンジニア",specializedOccupationId:"SO001",specializedOccupation:"フロントエンドエンジニア" },
+  { careerAreaId:"CA01",careerArea:"IT・テクノロジー",occupationGroupId:"OG01",occupationGroup:"ソフトウェア・システム開発",occupationId:"OC01",occupation:"Webエンジニア",specializedOccupationId:"SO002",specializedOccupation:"バックエンドエンジニア" },
+  { careerAreaId:"CA01",careerArea:"IT・テクノロジー",occupationGroupId:"OG01",occupationGroup:"ソフトウェア・システム開発",occupationId:"OC01",occupation:"Webエンジニア",specializedOccupationId:"SO003",specializedOccupation:"フルスタックエンジニア" },
+  { careerAreaId:"CA01",careerArea:"IT・テクノロジー",occupationGroupId:"OG01",occupationGroup:"ソフトウェア・システム開発",occupationId:"OC02",occupation:"モバイルエンジニア",specializedOccupationId:"SO004",specializedOccupation:"iOSエンジニア" },
+  { careerAreaId:"CA01",careerArea:"IT・テクノロジー",occupationGroupId:"OG01",occupationGroup:"ソフトウェア・システム開発",occupationId:"OC02",occupation:"モバイルエンジニア",specializedOccupationId:"SO005",specializedOccupation:"Androidエンジニア" },
+  { careerAreaId:"CA01",careerArea:"IT・テクノロジー",occupationGroupId:"OG01",occupationGroup:"ソフトウェア・システム開発",occupationId:"OC02",occupation:"モバイルエンジニア",specializedOccupationId:"SO006",specializedOccupation:"クロスプラットフォームエンジニア" },
+  { careerAreaId:"CA01",careerArea:"IT・テクノロジー",occupationGroupId:"OG01",occupationGroup:"ソフトウェア・システム開発",occupationId:"OC03",occupation:"インフラ・クラウドエンジニア",specializedOccupationId:"SO007",specializedOccupation:"インフラエンジニア" },
+  { careerAreaId:"CA01",careerArea:"IT・テクノロジー",occupationGroupId:"OG01",occupationGroup:"ソフトウェア・システム開発",occupationId:"OC03",occupation:"インフラ・クラウドエンジニア",specializedOccupationId:"SO008",specializedOccupation:"クラウドエンジニア" },
+  { careerAreaId:"CA01",careerArea:"IT・テクノロジー",occupationGroupId:"OG01",occupationGroup:"ソフトウェア・システム開発",occupationId:"OC03",occupation:"インフラ・クラウドエンジニア",specializedOccupationId:"SO009",specializedOccupation:"SRE/DevOpsエンジニア" },
+  { careerAreaId:"CA01",careerArea:"IT・テクノロジー",occupationGroupId:"OG01",occupationGroup:"ソフトウェア・システム開発",occupationId:"OC04",occupation:"QAエンジニア",specializedOccupationId:"SO010",specializedOccupation:"テストエンジニア" },
+  { careerAreaId:"CA01",careerArea:"IT・テクノロジー",occupationGroupId:"OG01",occupationGroup:"ソフトウェア・システム開発",occupationId:"OC04",occupation:"QAエンジニア",specializedOccupationId:"SO011",specializedOccupation:"テスト自動化エンジニア" },
+  { careerAreaId:"CA01",careerArea:"IT・テクノロジー",occupationGroupId:"OG01",occupationGroup:"ソフトウェア・システム開発",occupationId:"OC13",occupation:"テクニカルサポート・通信インフラ",specializedOccupationId:"SO097",specializedOccupation:"テクニカルサポートエンジニア" },
+  { careerAreaId:"CA01",careerArea:"IT・テクノロジー",occupationGroupId:"OG01",occupationGroup:"ソフトウェア・システム開発",occupationId:"OC13",occupation:"テクニカルサポート・通信インフラ",specializedOccupationId:"SO098",specializedOccupation:"通信インフラエンジニア（5G/NW）" },
+  { careerAreaId:"CA01",careerArea:"IT・テクノロジー",occupationGroupId:"OG02",occupationGroup:"データ・AI",occupationId:"OC05",occupation:"データサイエンティスト",specializedOccupationId:"SO012",specializedOccupation:"機械学習エンジニア" },
+  { careerAreaId:"CA01",careerArea:"IT・テクノロジー",occupationGroupId:"OG02",occupationGroup:"データ・AI",occupationId:"OC05",occupation:"データサイエンティスト",specializedOccupationId:"SO013",specializedOccupation:"データアナリスト" },
+  { careerAreaId:"CA01",careerArea:"IT・テクノロジー",occupationGroupId:"OG02",occupationGroup:"データ・AI",occupationId:"OC05",occupation:"データサイエンティスト",specializedOccupationId:"SO014",specializedOccupation:"統計モデリング専門家" },
+  { careerAreaId:"CA01",careerArea:"IT・テクノロジー",occupationGroupId:"OG02",occupationGroup:"データ・AI",occupationId:"OC06",occupation:"データエンジニア",specializedOccupationId:"SO015",specializedOccupation:"ETLエンジニア" },
+  { careerAreaId:"CA01",careerArea:"IT・テクノロジー",occupationGroupId:"OG02",occupationGroup:"データ・AI",occupationId:"OC06",occupation:"データエンジニア",specializedOccupationId:"SO016",specializedOccupation:"データアーキテクト" },
+  { careerAreaId:"CA01",careerArea:"IT・テクノロジー",occupationGroupId:"OG02",occupationGroup:"データ・AI",occupationId:"OC07",occupation:"AIエンジニア",specializedOccupationId:"SO017",specializedOccupation:"NLPエンジニア" },
+  { careerAreaId:"CA01",careerArea:"IT・テクノロジー",occupationGroupId:"OG02",occupationGroup:"データ・AI",occupationId:"OC07",occupation:"AIエンジニア",specializedOccupationId:"SO018",specializedOccupation:"コンピュータビジョンエンジニア" },
+  { careerAreaId:"CA01",careerArea:"IT・テクノロジー",occupationGroupId:"OG02",occupationGroup:"データ・AI",occupationId:"OC07",occupation:"AIエンジニア",specializedOccupationId:"SO019",specializedOccupation:"LLM/生成AIエンジニア" },
+  { careerAreaId:"CA01",careerArea:"IT・テクノロジー",occupationGroupId:"OG03",occupationGroup:"ITマネジメント・プロダクト",occupationId:"OC08",occupation:"プロダクトマネージャー",specializedOccupationId:"SO020",specializedOccupation:"B2BプロダクトPM" },
+  { careerAreaId:"CA01",careerArea:"IT・テクノロジー",occupationGroupId:"OG03",occupationGroup:"ITマネジメント・プロダクト",occupationId:"OC08",occupation:"プロダクトマネージャー",specializedOccupationId:"SO021",specializedOccupation:"B2CプロダクトPM" },
+  { careerAreaId:"CA01",careerArea:"IT・テクノロジー",occupationGroupId:"OG03",occupationGroup:"ITマネジメント・プロダクト",occupationId:"OC09",occupation:"プロジェクトマネージャー（IT）",specializedOccupationId:"SO022",specializedOccupation:"ITプロジェクトマネージャー" },
+  { careerAreaId:"CA01",careerArea:"IT・テクノロジー",occupationGroupId:"OG03",occupationGroup:"ITマネジメント・プロダクト",occupationId:"OC09",occupation:"プロジェクトマネージャー（IT）",specializedOccupationId:"SO023",specializedOccupation:"スクラムマスター" },
+  { careerAreaId:"CA01",careerArea:"IT・テクノロジー",occupationGroupId:"OG03",occupationGroup:"ITマネジメント・プロダクト",occupationId:"OC10",occupation:"UX/UIデザイナー",specializedOccupationId:"SO024",specializedOccupation:"UXデザイナー" },
+  { careerAreaId:"CA01",careerArea:"IT・テクノロジー",occupationGroupId:"OG03",occupationGroup:"ITマネジメント・プロダクト",occupationId:"OC10",occupation:"UX/UIデザイナー",specializedOccupationId:"SO025",specializedOccupation:"UIデザイナー" },
+  { careerAreaId:"CA01",careerArea:"IT・テクノロジー",occupationGroupId:"OG03",occupationGroup:"ITマネジメント・プロダクト",occupationId:"OC14",occupation:"ゲームプロデューサー・プランナー",specializedOccupationId:"SO099",specializedOccupation:"ゲームプロデューサー" },
+  { careerAreaId:"CA01",careerArea:"IT・テクノロジー",occupationGroupId:"OG03",occupationGroup:"ITマネジメント・プロダクト",occupationId:"OC14",occupation:"ゲームプロデューサー・プランナー",specializedOccupationId:"SO100",specializedOccupation:"ゲームプランナー" },
+  { careerAreaId:"CA01",careerArea:"IT・テクノロジー",occupationGroupId:"OG04",occupationGroup:"ITセキュリティ・運用",occupationId:"OC11",occupation:"セキュリティエンジニア",specializedOccupationId:"SO026",specializedOccupation:"セキュリティアナリスト" },
+  { careerAreaId:"CA01",careerArea:"IT・テクノロジー",occupationGroupId:"OG04",occupationGroup:"ITセキュリティ・運用",occupationId:"OC11",occupation:"セキュリティエンジニア",specializedOccupationId:"SO027",specializedOccupation:"ペネトレーションテスター" },
+  { careerAreaId:"CA01",careerArea:"IT・テクノロジー",occupationGroupId:"OG04",occupationGroup:"ITセキュリティ・運用",occupationId:"OC12",occupation:"IT運用・サポート",specializedOccupationId:"SO028",specializedOccupation:"システム管理者" },
+  { careerAreaId:"CA01",careerArea:"IT・テクノロジー",occupationGroupId:"OG04",occupationGroup:"ITセキュリティ・運用",occupationId:"OC12",occupation:"IT運用・サポート",specializedOccupationId:"SO029",specializedOccupation:"ネットワークエンジニア" },
+  { careerAreaId:"CA01",careerArea:"IT・テクノロジー",occupationGroupId:"OG05",occupationGroup:"IT営業・カスタマーサクセス",occupationId:"OC15",occupation:"IT営業・カスタマーサクセス",specializedOccupationId:"SO101",specializedOccupation:"カスタマーサクセスマネージャー（SaaS）" },
+  { careerAreaId:"CA01",careerArea:"IT・テクノロジー",occupationGroupId:"OG05",occupationGroup:"IT営業・カスタマーサクセス",occupationId:"OC15",occupation:"IT営業・カスタマーサクセス",specializedOccupationId:"SO102",specializedOccupation:"ITプリセールス・ソリューションアーキテクト" },
+  { careerAreaId:"CA99",careerArea:"全業種共通（営業/管理部門/企画等）",occupationGroupId:"OG05",occupationGroup:"営業",occupationId:"OC13",occupation:"法人営業",specializedOccupationId:"SO030",specializedOccupation:"IT・SaaS営業（フィールドセールス）" },
+  { careerAreaId:"CA99",careerArea:"全業種共通（営業/管理部門/企画等）",occupationGroupId:"OG05",occupationGroup:"営業",occupationId:"OC13",occupation:"法人営業",specializedOccupationId:"SO031",specializedOccupation:"IT・SaaS営業（インサイドセールス）" },
+  { careerAreaId:"CA99",careerArea:"全業種共通（営業/管理部門/企画等）",occupationGroupId:"OG05",occupationGroup:"営業",occupationId:"OC13",occupation:"法人営業",specializedOccupationId:"SO032",specializedOccupation:"メーカー技術営業" },
+  { careerAreaId:"CA99",careerArea:"全業種共通（営業/管理部門/企画等）",occupationGroupId:"OG05",occupationGroup:"営業",occupationId:"OC13",occupation:"法人営業",specializedOccupationId:"SO033",specializedOccupation:"医療機器営業" },
+  { careerAreaId:"CA99",careerArea:"全業種共通（営業/管理部門/企画等）",occupationGroupId:"OG05",occupationGroup:"営業",occupationId:"OC13",occupation:"法人営業",specializedOccupationId:"SO034",specializedOccupation:"金融法人営業" },
+  { careerAreaId:"CA99",careerArea:"全業種共通（営業/管理部門/企画等）",occupationGroupId:"OG05",occupationGroup:"営業",occupationId:"OC14",occupation:"個人向け営業",specializedOccupationId:"SO035",specializedOccupation:"不動産投資営業" },
+  { careerAreaId:"CA99",careerArea:"全業種共通（営業/管理部門/企画等）",occupationGroupId:"OG05",occupationGroup:"営業",occupationId:"OC14",occupation:"個人向け営業",specializedOccupationId:"SO036",specializedOccupation:"住宅営業" },
+  { careerAreaId:"CA99",careerArea:"全業種共通（営業/管理部門/企画等）",occupationGroupId:"OG05",occupationGroup:"営業",occupationId:"OC14",occupation:"個人向け営業",specializedOccupationId:"SO037",specializedOccupation:"金融個人営業（FP）" },
+  { careerAreaId:"CA99",careerArea:"全業種共通（営業/管理部門/企画等）",occupationGroupId:"OG06",occupationGroup:"企画・マーケティング",occupationId:"OC15",occupation:"経営企画・事業開発",specializedOccupationId:"SO038",specializedOccupation:"経営企画担当" },
+  { careerAreaId:"CA99",careerArea:"全業種共通（営業/管理部門/企画等）",occupationGroupId:"OG06",occupationGroup:"企画・マーケティング",occupationId:"OC15",occupation:"経営企画・事業開発",specializedOccupationId:"SO039",specializedOccupation:"新規事業開発担当" },
+  { careerAreaId:"CA99",careerArea:"全業種共通（営業/管理部門/企画等）",occupationGroupId:"OG06",occupationGroup:"企画・マーケティング",occupationId:"OC15",occupation:"経営企画・事業開発",specializedOccupationId:"SO040",specializedOccupation:"M&Aアナリスト" },
+  { careerAreaId:"CA99",careerArea:"全業種共通（営業/管理部門/企画等）",occupationGroupId:"OG06",occupationGroup:"企画・マーケティング",occupationId:"OC16",occupation:"マーケティング",specializedOccupationId:"SO041",specializedOccupation:"デジタルマーケター（SEO/SEM）" },
+  { careerAreaId:"CA99",careerArea:"全業種共通（営業/管理部門/企画等）",occupationGroupId:"OG06",occupationGroup:"企画・マーケティング",occupationId:"OC16",occupation:"マーケティング",specializedOccupationId:"SO042",specializedOccupation:"SNSマーケター" },
+  { careerAreaId:"CA99",careerArea:"全業種共通（営業/管理部門/企画等）",occupationGroupId:"OG06",occupationGroup:"企画・マーケティング",occupationId:"OC16",occupation:"マーケティング",specializedOccupationId:"SO043",specializedOccupation:"プロダクトマーケティングマネージャー" },
+  { careerAreaId:"CA99",careerArea:"全業種共通（営業/管理部門/企画等）",occupationGroupId:"OG06",occupationGroup:"企画・マーケティング",occupationId:"OC16",occupation:"マーケティング",specializedOccupationId:"SO044",specializedOccupation:"ブランドマネージャー" },
+  { careerAreaId:"CA99",careerArea:"全業種共通（営業/管理部門/企画等）",occupationGroupId:"OG06",occupationGroup:"企画・マーケティング",occupationId:"OC17",occupation:"クリエイティブ",specializedOccupationId:"SO045",specializedOccupation:"コピーライター" },
+  { careerAreaId:"CA99",careerArea:"全業種共通（営業/管理部門/企画等）",occupationGroupId:"OG06",occupationGroup:"企画・マーケティング",occupationId:"OC17",occupation:"クリエイティブ",specializedOccupationId:"SO046",specializedOccupation:"コンテンツマーケター" },
+  { careerAreaId:"CA99",careerArea:"全業種共通（営業/管理部門/企画等）",occupationGroupId:"OG07",occupationGroup:"管理・スタッフ",occupationId:"OC18",occupation:"財務・会計",specializedOccupationId:"SO047",specializedOccupation:"CFO/財務部長" },
+  { careerAreaId:"CA99",careerArea:"全業種共通（営業/管理部門/企画等）",occupationGroupId:"OG07",occupationGroup:"管理・スタッフ",occupationId:"OC18",occupation:"財務・会計",specializedOccupationId:"SO048",specializedOccupation:"財務アナリスト" },
+  { careerAreaId:"CA99",careerArea:"全業種共通（営業/管理部門/企画等）",occupationGroupId:"OG07",occupationGroup:"管理・スタッフ",occupationId:"OC18",occupation:"財務・会計",specializedOccupationId:"SO049",specializedOccupation:"経理マネージャー" },
+  { careerAreaId:"CA99",careerArea:"全業種共通（営業/管理部門/企画等）",occupationGroupId:"OG07",occupationGroup:"管理・スタッフ",occupationId:"OC18",occupation:"財務・会計",specializedOccupationId:"SO050",specializedOccupation:"経理担当（一般）" },
+  { careerAreaId:"CA99",careerArea:"全業種共通（営業/管理部門/企画等）",occupationGroupId:"OG07",occupationGroup:"管理・スタッフ",occupationId:"OC19",occupation:"法務・コンプライアンス",specializedOccupationId:"SO051",specializedOccupation:"企業法務（契約）" },
+  { careerAreaId:"CA99",careerArea:"全業種共通（営業/管理部門/企画等）",occupationGroupId:"OG07",occupationGroup:"管理・スタッフ",occupationId:"OC19",occupation:"法務・コンプライアンス",specializedOccupationId:"SO052",specializedOccupation:"知的財産担当" },
+  { careerAreaId:"CA99",careerArea:"全業種共通（営業/管理部門/企画等）",occupationGroupId:"OG07",occupationGroup:"管理・スタッフ",occupationId:"OC19",occupation:"法務・コンプライアンス",specializedOccupationId:"SO053",specializedOccupation:"コンプライアンス担当" },
+  { careerAreaId:"CA99",careerArea:"全業種共通（営業/管理部門/企画等）",occupationGroupId:"OG07",occupationGroup:"管理・スタッフ",occupationId:"OC20",occupation:"人事・組織開発",specializedOccupationId:"SO054",specializedOccupation:"中途採用担当" },
+  { careerAreaId:"CA99",careerArea:"全業種共通（営業/管理部門/企画等）",occupationGroupId:"OG07",occupationGroup:"管理・スタッフ",occupationId:"OC20",occupation:"人事・組織開発",specializedOccupationId:"SO055",specializedOccupation:"HRBPマネージャー" },
+  { careerAreaId:"CA99",careerArea:"全業種共通（営業/管理部門/企画等）",occupationGroupId:"OG07",occupationGroup:"管理・スタッフ",occupationId:"OC20",occupation:"人事・組織開発",specializedOccupationId:"SO056",specializedOccupation:"タレントマネジメント担当" },
+  { careerAreaId:"CA99",careerArea:"全業種共通（営業/管理部門/企画等）",occupationGroupId:"OG07",occupationGroup:"管理・スタッフ",occupationId:"OC20",occupation:"人事・組織開発",specializedOccupationId:"SO057",specializedOccupation:"研修・L&D担当" },
+  { careerAreaId:"CA02",careerArea:"コンサルティング・専門サービス",occupationGroupId:"OG08",occupationGroup:"コンサルティング",occupationId:"OC21",occupation:"経営・戦略コンサルタント",specializedOccupationId:"SO058",specializedOccupation:"経営戦略コンサルタント" },
+  { careerAreaId:"CA02",careerArea:"コンサルティング・専門サービス",occupationGroupId:"OG08",occupationGroup:"コンサルティング",occupationId:"OC21",occupation:"経営・戦略コンサルタント",specializedOccupationId:"SO059",specializedOccupation:"事業戦略コンサルタント" },
+  { careerAreaId:"CA02",careerArea:"コンサルティング・専門サービス",occupationGroupId:"OG08",occupationGroup:"コンサルティング",occupationId:"OC21",occupation:"経営・戦略コンサルタント",specializedOccupationId:"SO060",specializedOccupation:"M&Aアドバイザー" },
+  { careerAreaId:"CA02",careerArea:"コンサルティング・専門サービス",occupationGroupId:"OG08",occupationGroup:"コンサルティング",occupationId:"OC22",occupation:"ITコンサルタント",specializedOccupationId:"SO061",specializedOccupation:"DXコンサルタント" },
+  { careerAreaId:"CA02",careerArea:"コンサルティング・専門サービス",occupationGroupId:"OG08",occupationGroup:"コンサルティング",occupationId:"OC22",occupation:"ITコンサルタント",specializedOccupationId:"SO062",specializedOccupation:"ERPコンサルタント" },
+  { careerAreaId:"CA02",careerArea:"コンサルティング・専門サービス",occupationGroupId:"OG08",occupationGroup:"コンサルティング",occupationId:"OC22",occupation:"ITコンサルタント",specializedOccupationId:"SO063",specializedOccupation:"システムアーキテクト" },
+  { careerAreaId:"CA02",careerArea:"コンサルティング・専門サービス",occupationGroupId:"OG08",occupationGroup:"コンサルティング",occupationId:"OC23",occupation:"業務・組織コンサルタント",specializedOccupationId:"SO064",specializedOccupation:"BPRコンサルタント" },
+  { careerAreaId:"CA02",careerArea:"コンサルティング・専門サービス",occupationGroupId:"OG08",occupationGroup:"コンサルティング",occupationId:"OC23",occupation:"業務・組織コンサルタント",specializedOccupationId:"SO065",specializedOccupation:"SCMコンサルタント" },
+  { careerAreaId:"CA02",careerArea:"コンサルティング・専門サービス",occupationGroupId:"OG08",occupationGroup:"コンサルティング",occupationId:"OC23",occupation:"業務・組織コンサルタント",specializedOccupationId:"SO066",specializedOccupation:"人事・組織コンサルタント" },
+  { careerAreaId:"CA02",careerArea:"コンサルティング・専門サービス",occupationGroupId:"OG08",occupationGroup:"コンサルティング",occupationId:"OC24",occupation:"財務・会計コンサルタント",specializedOccupationId:"SO103",specializedOccupation:"財務DDアドバイザー（FAS）" },
+  { careerAreaId:"CA02",careerArea:"コンサルティング・専門サービス",occupationGroupId:"OG08",occupationGroup:"コンサルティング",occupationId:"OC24",occupation:"財務・会計コンサルタント",specializedOccupationId:"SO104",specializedOccupation:"会計監査・内部統制コンサルタント" },
+  { careerAreaId:"CA02",careerArea:"コンサルティング・専門サービス",occupationGroupId:"OG08",occupationGroup:"コンサルティング",occupationId:"OC25",occupation:"リスク・サステナビリティコンサルタント",specializedOccupationId:"SO105",specializedOccupation:"ESG・サステナビリティコンサルタント" },
+  { careerAreaId:"CA02",careerArea:"コンサルティング・専門サービス",occupationGroupId:"OG08",occupationGroup:"コンサルティング",occupationId:"OC25",occupation:"リスク・サステナビリティコンサルタント",specializedOccupationId:"SO106",specializedOccupation:"リスクマネジメントコンサルタント" },
+  { careerAreaId:"CA03",careerArea:"金融・保険",occupationGroupId:"OG09",occupationGroup:"銀行・証券",occupationId:"OC24",occupation:"銀行業務",specializedOccupationId:"SO067",specializedOccupation:"リテールバンキング担当" },
+  { careerAreaId:"CA03",careerArea:"金融・保険",occupationGroupId:"OG09",occupationGroup:"銀行・証券",occupationId:"OC24",occupation:"銀行業務",specializedOccupationId:"SO068",specializedOccupation:"コーポレートバンカー" },
+  { careerAreaId:"CA03",careerArea:"金融・保険",occupationGroupId:"OG09",occupationGroup:"銀行・証券",occupationId:"OC24",occupation:"銀行業務",specializedOccupationId:"SO069",specializedOccupation:"融資・審査担当" },
+  { careerAreaId:"CA03",careerArea:"金融・保険",occupationGroupId:"OG09",occupationGroup:"銀行・証券",occupationId:"OC25",occupation:"証券・投資",specializedOccupationId:"SO070",specializedOccupation:"株式トレーダー" },
+  { careerAreaId:"CA03",careerArea:"金融・保険",occupationGroupId:"OG09",occupationGroup:"銀行・証券",occupationId:"OC25",occupation:"証券・投資",specializedOccupationId:"SO071",specializedOccupation:"投資アナリスト" },
+  { careerAreaId:"CA03",careerArea:"金融・保険",occupationGroupId:"OG09",occupationGroup:"銀行・証券",occupationId:"OC25",occupation:"証券・投資",specializedOccupationId:"SO072",specializedOccupation:"ファンドマネージャー" },
+  { careerAreaId:"CA03",careerArea:"金融・保険",occupationGroupId:"OG09",occupationGroup:"銀行・証券",occupationId:"OC26",occupation:"リース・クレジット",specializedOccupationId:"SO107",specializedOccupation:"リース営業担当" },
+  { careerAreaId:"CA03",careerArea:"金融・保険",occupationGroupId:"OG09",occupationGroup:"銀行・証券",occupationId:"OC26",occupation:"リース・クレジット",specializedOccupationId:"SO108",specializedOccupation:"クレジット審査担当" },
+  { careerAreaId:"CA03",careerArea:"金融・保険",occupationGroupId:"OG10",occupationGroup:"保険",occupationId:"OC26",occupation:"損害保険",specializedOccupationId:"SO073",specializedOccupation:"損害査定員" },
+  { careerAreaId:"CA03",careerArea:"金融・保険",occupationGroupId:"OG10",occupationGroup:"保険",occupationId:"OC26",occupation:"損害保険",specializedOccupationId:"SO074",specializedOccupation:"アンダーライター（損保）" },
+  { careerAreaId:"CA03",careerArea:"金融・保険",occupationGroupId:"OG10",occupationGroup:"保険",occupationId:"OC27",occupation:"生命保険",specializedOccupationId:"SO075",specializedOccupation:"生命保険営業担当" },
+  { careerAreaId:"CA03",careerArea:"金融・保険",occupationGroupId:"OG10",occupationGroup:"保険",occupationId:"OC27",occupation:"生命保険",specializedOccupationId:"SO076",specializedOccupation:"アクチュアリー" },
+  { careerAreaId:"CA03",careerArea:"金融・保険",occupationGroupId:"OG10",occupationGroup:"保険",occupationId:"OC27",occupation:"損保・生保事務",specializedOccupationId:"SO109",specializedOccupation:"保険事務担当" },
+  { careerAreaId:"CA03",careerArea:"金融・保険",occupationGroupId:"OG10",occupationGroup:"保険",occupationId:"OC27",occupation:"損保・生保事務",specializedOccupationId:"SO110",specializedOccupation:"損害調査担当" },
+  { careerAreaId:"CA03",careerArea:"金融・保険",occupationGroupId:"OG11",occupationGroup:"フィンテック・資産運用",occupationId:"OC28",occupation:"資産運用・PEファンド",specializedOccupationId:"SO111",specializedOccupation:"プライベートエクイティアナリスト" },
+  { careerAreaId:"CA03",careerArea:"金融・保険",occupationGroupId:"OG11",occupationGroup:"フィンテック・資産運用",occupationId:"OC28",occupation:"資産運用・PEファンド",specializedOccupationId:"SO112",specializedOccupation:"フィンテックプロダクトマネージャー" },
+  { careerAreaId:"CA04",careerArea:"医療・福祉・介護",occupationGroupId:"OG11",occupationGroup:"医師・薬剤師",occupationId:"OC28",occupation:"内科系医師",specializedOccupationId:"SO077",specializedOccupation:"一般内科医" },
+  { careerAreaId:"CA04",careerArea:"医療・福祉・介護",occupationGroupId:"OG11",occupationGroup:"医師・薬剤師",occupationId:"OC28",occupation:"内科系医師",specializedOccupationId:"SO078",specializedOccupation:"循環器内科医" },
+  { careerAreaId:"CA04",careerArea:"医療・福祉・介護",occupationGroupId:"OG11",occupationGroup:"医師・薬剤師",occupationId:"OC29",occupation:"外科系医師",specializedOccupationId:"SO079",specializedOccupation:"一般外科医" },
+  { careerAreaId:"CA04",careerArea:"医療・福祉・介護",occupationGroupId:"OG11",occupationGroup:"医師・薬剤師",occupationId:"OC29",occupation:"外科系医師",specializedOccupationId:"SO080",specializedOccupation:"整形外科医" },
+  { careerAreaId:"CA04",careerArea:"医療・福祉・介護",occupationGroupId:"OG11",occupationGroup:"医師・薬剤師",occupationId:"OC30",occupation:"薬剤師",specializedOccupationId:"SO081",specializedOccupation:"病院薬剤師" },
+  { careerAreaId:"CA04",careerArea:"医療・福祉・介護",occupationGroupId:"OG11",occupationGroup:"医師・薬剤師",occupationId:"OC30",occupation:"薬剤師",specializedOccupationId:"SO082",specializedOccupation:"調剤薬局薬剤師" },
+  { careerAreaId:"CA04",careerArea:"医療・福祉・介護",occupationGroupId:"OG12",occupationGroup:"看護・介護",occupationId:"OC31",occupation:"病院看護師",specializedOccupationId:"SO083",specializedOccupation:"病棟看護師" },
+  { careerAreaId:"CA04",careerArea:"医療・福祉・介護",occupationGroupId:"OG12",occupationGroup:"看護・介護",occupationId:"OC31",occupation:"病院看護師",specializedOccupationId:"SO084",specializedOccupation:"ICU看護師" },
+  { careerAreaId:"CA04",careerArea:"医療・福祉・介護",occupationGroupId:"OG12",occupationGroup:"看護・介護",occupationId:"OC32",occupation:"地域・在宅看護師",specializedOccupationId:"SO085",specializedOccupation:"訪問看護師" },
+  { careerAreaId:"CA04",careerArea:"医療・福祉・介護",occupationGroupId:"OG12",occupationGroup:"看護・介護",occupationId:"OC32",occupation:"地域・在宅看護師",specializedOccupationId:"SO086",specializedOccupation:"保健師" },
+  { careerAreaId:"CA04",careerArea:"医療・福祉・介護",occupationGroupId:"OG12",occupationGroup:"看護・介護",occupationId:"OC33",occupation:"介護福祉士",specializedOccupationId:"SO087",specializedOccupation:"施設介護士" },
+  { careerAreaId:"CA04",careerArea:"医療・福祉・介護",occupationGroupId:"OG12",occupationGroup:"看護・介護",occupationId:"OC33",occupation:"介護福祉士",specializedOccupationId:"SO088",specializedOccupation:"ケアマネージャー" },
+  { careerAreaId:"CA04",careerArea:"医療・福祉・介護",occupationGroupId:"OG12",occupationGroup:"看護・介護",occupationId:"OC29",occupation:"リハビリテーション",specializedOccupationId:"SO113",specializedOccupation:"理学療法士（PT）" },
+  { careerAreaId:"CA04",careerArea:"医療・福祉・介護",occupationGroupId:"OG12",occupationGroup:"看護・介護",occupationId:"OC29",occupation:"リハビリテーション",specializedOccupationId:"SO114",specializedOccupation:"作業療法士（OT）" },
+  { careerAreaId:"CA04",careerArea:"医療・福祉・介護",occupationGroupId:"OG12",occupationGroup:"看護・介護",occupationId:"OC29",occupation:"リハビリテーション",specializedOccupationId:"SO115",specializedOccupation:"言語聴覚士（ST）" },
+  { careerAreaId:"CA04",careerArea:"医療・福祉・介護",occupationGroupId:"OG13",occupationGroup:"医師・薬剤師",occupationId:"OC30",occupation:"コメディカル",specializedOccupationId:"SO116",specializedOccupation:"臨床検査技師" },
+  { careerAreaId:"CA04",careerArea:"医療・福祉・介護",occupationGroupId:"OG13",occupationGroup:"医師・薬剤師",occupationId:"OC30",occupation:"コメディカル",specializedOccupationId:"SO117",specializedOccupation:"診療放射線技師" },
+  { careerAreaId:"CA04",careerArea:"医療・福祉・介護",occupationGroupId:"OG14",occupationGroup:"医療・ヘルスケア事業",occupationId:"OC31",occupation:"MR・メディカルアフェア",specializedOccupationId:"SO118",specializedOccupation:"MR（医薬品営業）" },
+  { careerAreaId:"CA04",careerArea:"医療・福祉・介護",occupationGroupId:"OG14",occupationGroup:"医療・ヘルスケア事業",occupationId:"OC31",occupation:"MR・メディカルアフェア",specializedOccupationId:"SO119",specializedOccupation:"メディカルアフェアズ担当" },
+  { careerAreaId:"CA04",careerArea:"医療・福祉・介護",occupationGroupId:"OG14",occupationGroup:"医療・ヘルスケア事業",occupationId:"OC32",occupation:"医療経営・クリニック管理",specializedOccupationId:"SO120",specializedOccupation:"医療事務担当" },
+  { careerAreaId:"CA04",careerArea:"医療・福祉・介護",occupationGroupId:"OG14",occupationGroup:"医療・ヘルスケア事業",occupationId:"OC32",occupation:"医療経営・クリニック管理",specializedOccupationId:"SO121",specializedOccupation:"クリニック運営管理担当" },
+  { careerAreaId:"CA05",careerArea:"メーカー・製造業",occupationGroupId:"OG13",occupationGroup:"製品開発・設計",occupationId:"OC34",occupation:"機械設計エンジニア",specializedOccupationId:"SO089",specializedOccupation:"機械設計（部品・ユニット）" },
+  { careerAreaId:"CA05",careerArea:"メーカー・製造業",occupationGroupId:"OG13",occupationGroup:"製品開発・設計",occupationId:"OC34",occupation:"機械設計エンジニア",specializedOccupationId:"SO090",specializedOccupation:"CAD/CAE設計エンジニア" },
+  { careerAreaId:"CA05",careerArea:"メーカー・製造業",occupationGroupId:"OG13",occupationGroup:"製品開発・設計",occupationId:"OC35",occupation:"電気・電子設計エンジニア",specializedOccupationId:"SO091",specializedOccupation:"回路設計エンジニア" },
+  { careerAreaId:"CA05",careerArea:"メーカー・製造業",occupationGroupId:"OG13",occupationGroup:"製品開発・設計",occupationId:"OC35",occupation:"電気・電子設計エンジニア",specializedOccupationId:"SO092",specializedOccupation:"組込みソフトウェアエンジニア" },
+  { careerAreaId:"CA05",careerArea:"メーカー・製造業",occupationGroupId:"OG13",occupationGroup:"製品開発・設計",occupationId:"OC33",occupation:"化学・素材開発エンジニア",specializedOccupationId:"SO122",specializedOccupation:"化学材料・素材研究開発エンジニア" },
+  { careerAreaId:"CA05",careerArea:"メーカー・製造業",occupationGroupId:"OG13",occupationGroup:"製品開発・設計",occupationId:"OC33",occupation:"化学・素材開発エンジニア",specializedOccupationId:"SO123",specializedOccupation:"食品・医薬品製造技術職" },
+  { careerAreaId:"CA05",careerArea:"メーカー・製造業",occupationGroupId:"OG14",occupationGroup:"生産・品質管理",occupationId:"OC36",occupation:"生産管理",specializedOccupationId:"SO093",specializedOccupation:"生産計画担当" },
+  { careerAreaId:"CA05",careerArea:"メーカー・製造業",occupationGroupId:"OG14",occupationGroup:"生産・品質管理",occupationId:"OC36",occupation:"生産管理",specializedOccupationId:"SO094",specializedOccupation:"工程管理担当" },
+  { careerAreaId:"CA05",careerArea:"メーカー・製造業",occupationGroupId:"OG14",occupationGroup:"生産・品質管理",occupationId:"OC37",occupation:"品質管理・品質保証",specializedOccupationId:"SO095",specializedOccupation:"品質管理担当" },
+  { careerAreaId:"CA05",careerArea:"メーカー・製造業",occupationGroupId:"OG14",occupationGroup:"生産・品質管理",occupationId:"OC37",occupation:"品質管理・品質保証",specializedOccupationId:"SO096",specializedOccupation:"品質保証エンジニア" },
+  { careerAreaId:"CA05",careerArea:"メーカー・製造業",occupationGroupId:"OG14",occupationGroup:"生産・品質管理",occupationId:"OC34",occupation:"購買・調達エンジニア",specializedOccupationId:"SO124",specializedOccupation:"購買・調達エンジニア（サプライヤー管理）" },
+  { careerAreaId:"CA05",careerArea:"メーカー・製造業",occupationGroupId:"OG14",occupationGroup:"生産・品質管理",occupationId:"OC35",occupation:"設備保全エンジニア",specializedOccupationId:"SO125",specializedOccupation:"設備保全・メンテナンスエンジニア" },
+  { careerAreaId:"CA05",careerArea:"メーカー・製造業",occupationGroupId:"OG14",occupationGroup:"生産・品質管理",occupationId:"OC36",occupation:"生産技術エンジニア",specializedOccupationId:"SO126",specializedOccupation:"生産技術・製造プロセスエンジニア" },
+  { careerAreaId:"CA06",careerArea:"人材・教育",occupationGroupId:"OG15",occupationGroup:"人材サービス",occupationId:"OC37",occupation:"キャリアアドバイザー・人材コンサルタント",specializedOccupationId:"SO127",specializedOccupation:"転職エージェント（CA：求職者支援）" },
+  { careerAreaId:"CA06",careerArea:"人材・教育",occupationGroupId:"OG15",occupationGroup:"人材サービス",occupationId:"OC37",occupation:"キャリアアドバイザー・人材コンサルタント",specializedOccupationId:"SO128",specializedOccupation:"リクルーティングアドバイザー（RA：企業開拓）" },
+  { careerAreaId:"CA06",careerArea:"人材・教育",occupationGroupId:"OG15",occupationGroup:"人材サービス",occupationId:"OC37",occupation:"キャリアアドバイザー・人材コンサルタント",specializedOccupationId:"SO129",specializedOccupation:"人材コーディネーター（派遣スタッフ管理）" },
+  { careerAreaId:"CA06",careerArea:"人材・教育",occupationGroupId:"OG15",occupationGroup:"人材サービス",occupationId:"OC38",occupation:"採用支援・RPO",specializedOccupationId:"SO130",specializedOccupation:"採用代行・RPOコンサルタント" },
+  { careerAreaId:"CA06",careerArea:"人材・教育",occupationGroupId:"OG16",occupationGroup:"教育・研修",occupationId:"OC39",occupation:"学校・塾講師",specializedOccupationId:"SO131",specializedOccupation:"学習塾講師・個別指導講師" },
+  { careerAreaId:"CA06",careerArea:"人材・教育",occupationGroupId:"OG16",occupationGroup:"教育・研修",occupationId:"OC39",occupation:"学校・塾講師",specializedOccupationId:"SO132",specializedOccupation:"語学スクール講師" },
+  { careerAreaId:"CA06",careerArea:"人材・教育",occupationGroupId:"OG16",occupationGroup:"教育・研修",occupationId:"OC40",occupation:"企業内教育・インストラクター",specializedOccupationId:"SO133",specializedOccupation:"法人研修講師・研修ファシリテーター" },
+  { careerAreaId:"CA06",careerArea:"人材・教育",occupationGroupId:"OG16",occupationGroup:"教育・研修",occupationId:"OC40",occupation:"企業内教育・インストラクター",specializedOccupationId:"SO134",specializedOccupation:"eラーニング・コンテンツ開発担当" },
+  { careerAreaId:"CA06",careerArea:"人材・教育",occupationGroupId:"OG16",occupationGroup:"教育・研修",occupationId:"OC41",occupation:"保育・教員",specializedOccupationId:"SO135",specializedOccupation:"保育士・幼稚園教諭" },
+  { careerAreaId:"CA07",careerArea:"広告・メディア・クリエイティブ",occupationGroupId:"OG17",occupationGroup:"広告・PR",occupationId:"OC42",occupation:"広告プランナー・ディレクター",specializedOccupationId:"SO136",specializedOccupation:"総合広告代理店プランナー" },
+  { careerAreaId:"CA07",careerArea:"広告・メディア・クリエイティブ",occupationGroupId:"OG17",occupationGroup:"広告・PR",occupationId:"OC42",occupation:"広告プランナー・ディレクター",specializedOccupationId:"SO137",specializedOccupation:"デジタル広告ディレクター" },
+  { careerAreaId:"CA07",careerArea:"広告・メディア・クリエイティブ",occupationGroupId:"OG17",occupationGroup:"広告・PR",occupationId:"OC43",occupation:"PRプランナー・広報",specializedOccupationId:"SO138",specializedOccupation:"PRコンサルタント" },
+  { careerAreaId:"CA07",careerArea:"広告・メディア・クリエイティブ",occupationGroupId:"OG17",occupationGroup:"広告・PR",occupationId:"OC43",occupation:"PRプランナー・広報",specializedOccupationId:"SO139",specializedOccupation:"コーポレート広報担当" },
+  { careerAreaId:"CA07",careerArea:"広告・メディア・クリエイティブ",occupationGroupId:"OG18",occupationGroup:"メディア・出版",occupationId:"OC44",occupation:"編集・ライター",specializedOccupationId:"SO140",specializedOccupation:"雑誌・書籍編集者" },
+  { careerAreaId:"CA07",careerArea:"広告・メディア・クリエイティブ",occupationGroupId:"OG18",occupationGroup:"メディア・出版",occupationId:"OC44",occupation:"編集・ライター",specializedOccupationId:"SO141",specializedOccupation:"Webコンテンツライター・ディレクター" },
+  { careerAreaId:"CA07",careerArea:"広告・メディア・クリエイティブ",occupationGroupId:"OG18",occupationGroup:"メディア・出版",occupationId:"OC45",occupation:"記者・アナウンサー",specializedOccupationId:"SO142",specializedOccupation:"新聞・Web記者" },
+  { careerAreaId:"CA07",careerArea:"広告・メディア・クリエイティブ",occupationGroupId:"OG18",occupationGroup:"メディア・出版",occupationId:"OC45",occupation:"記者・アナウンサー",specializedOccupationId:"SO143",specializedOccupation:"テレビ・ラジオアナウンサー" },
+  { careerAreaId:"CA07",careerArea:"広告・メディア・クリエイティブ",occupationGroupId:"OG19",occupationGroup:"クリエイティブ制作",occupationId:"OC46",occupation:"グラフィック・映像デザイナー",specializedOccupationId:"SO144",specializedOccupation:"グラフィックデザイナー（広告・印刷）" },
+  { careerAreaId:"CA07",careerArea:"広告・メディア・クリエイティブ",occupationGroupId:"OG19",occupationGroup:"クリエイティブ制作",occupationId:"OC46",occupation:"グラフィック・映像デザイナー",specializedOccupationId:"SO145",specializedOccupation:"映像ディレクター・動画編集者" },
+  { careerAreaId:"CA08",careerArea:"物流・運輸",occupationGroupId:"OG20",occupationGroup:"物流オペレーション",occupationId:"OC47",occupation:"倉庫・物流管理",specializedOccupationId:"SO146",specializedOccupation:"倉庫管理・在庫管理担当" },
+  { careerAreaId:"CA08",careerArea:"物流・運輸",occupationGroupId:"OG20",occupationGroup:"物流オペレーション",occupationId:"OC47",occupation:"倉庫・物流管理",specializedOccupationId:"SO147",specializedOccupation:"フォークリフトオペレーター" },
+  { careerAreaId:"CA08",careerArea:"物流・運輸",occupationGroupId:"OG20",occupationGroup:"物流オペレーション",occupationId:"OC48",occupation:"ドライバー・配送",specializedOccupationId:"SO148",specializedOccupation:"大型トラックドライバー" },
+  { careerAreaId:"CA08",careerArea:"物流・運輸",occupationGroupId:"OG20",occupationGroup:"物流オペレーション",occupationId:"OC48",occupation:"ドライバー・配送",specializedOccupationId:"SO149",specializedOccupation:"配送ドライバー（中小型）" },
+  { careerAreaId:"CA08",careerArea:"物流・運輸",occupationGroupId:"OG21",occupationGroup:"物流企画・管理",occupationId:"OC49",occupation:"ロジスティクス企画",specializedOccupationId:"SO150",specializedOccupation:"ロジスティクスプランナー" },
+  { careerAreaId:"CA08",careerArea:"物流・運輸",occupationGroupId:"OG21",occupationGroup:"物流企画・管理",occupationId:"OC49",occupation:"ロジスティクス企画",specializedOccupationId:"SO151",specializedOccupation:"3PL提案・物流コンサルタント" },
+  { careerAreaId:"CA08",careerArea:"物流・運輸",occupationGroupId:"OG21",occupationGroup:"物流企画・管理",occupationId:"OC50",occupation:"貿易・通関",specializedOccupationId:"SO152",specializedOccupation:"貿易事務・通関士" },
+  { careerAreaId:"CA08",careerArea:"物流・運輸",occupationGroupId:"OG21",occupationGroup:"物流企画・管理",occupationId:"OC50",occupation:"貿易・通関",specializedOccupationId:"SO153",specializedOccupation:"フォワーダー（国際輸送代理）" },
+  { careerAreaId:"CA09",careerArea:"サービス・生活関連",occupationGroupId:"OG22",occupationGroup:"ホテル・観光・ブライダル",occupationId:"OC51",occupation:"ホテルフロント・コンシェルジュ",specializedOccupationId:"SO154",specializedOccupation:"ホテルフロントスタッフ" },
+  { careerAreaId:"CA09",careerArea:"サービス・生活関連",occupationGroupId:"OG22",occupationGroup:"ホテル・観光・ブライダル",occupationId:"OC51",occupation:"ホテルフロント・コンシェルジュ",specializedOccupationId:"SO155",specializedOccupation:"ブライダルコーディネーター" },
+  { careerAreaId:"CA09",careerArea:"サービス・生活関連",occupationGroupId:"OG22",occupationGroup:"ホテル・観光・ブライダル",occupationId:"OC52",occupation:"旅行・観光プランナー",specializedOccupationId:"SO156",specializedOccupation:"旅行会社ツアープランナー" },
+  { careerAreaId:"CA09",careerArea:"サービス・生活関連",occupationGroupId:"OG22",occupationGroup:"ホテル・観光・ブライダル",occupationId:"OC52",occupation:"旅行・観光プランナー",specializedOccupationId:"SO157",specializedOccupation:"観光地域プロデューサー（DMO）" },
+  { careerAreaId:"CA09",careerArea:"サービス・生活関連",occupationGroupId:"OG23",occupationGroup:"美容・ウェルネス",occupationId:"OC53",occupation:"美容師・ネイリスト",specializedOccupationId:"SO158",specializedOccupation:"美容師・ヘアスタイリスト" },
+  { careerAreaId:"CA09",careerArea:"サービス・生活関連",occupationGroupId:"OG23",occupationGroup:"美容・ウェルネス",occupationId:"OC53",occupation:"美容師・ネイリスト",specializedOccupationId:"SO159",specializedOccupation:"エステティシャン・ネイリスト" },
+  { careerAreaId:"CA09",careerArea:"サービス・生活関連",occupationGroupId:"OG23",occupationGroup:"美容・ウェルネス",occupationId:"OC54",occupation:"フィットネス・スポーツ",specializedOccupationId:"SO160",specializedOccupation:"パーソナルトレーナー" },
+  { careerAreaId:"CA09",careerArea:"サービス・生活関連",occupationGroupId:"OG23",occupationGroup:"美容・ウェルネス",occupationId:"OC54",occupation:"フィットネス・スポーツ",specializedOccupationId:"SO161",specializedOccupation:"スポーツインストラクター" },
+  { careerAreaId:"CA09",careerArea:"サービス・生活関連",occupationGroupId:"OG24",occupationGroup:"警備・清掃・施設管理",occupationId:"OC55",occupation:"警備・セキュリティ",specializedOccupationId:"SO162",specializedOccupation:"施設警備・交通誘導警備員" },
+  { careerAreaId:"CA09",careerArea:"サービス・生活関連",occupationGroupId:"OG24",occupationGroup:"警備・清掃・施設管理",occupationId:"OC56",occupation:"ビルメンテナンス",specializedOccupationId:"SO163",specializedOccupation:"ビルメンテナンス技術者" },
+  { careerAreaId:"CA10",careerArea:"食品・飲食",occupationGroupId:"OG25",occupationGroup:"飲食・外食",occupationId:"OC57",occupation:"調理・キッチン",specializedOccupationId:"SO164",specializedOccupation:"料理人・シェフ（和洋中）" },
+  { careerAreaId:"CA10",careerArea:"食品・飲食",occupationGroupId:"OG25",occupationGroup:"飲食・外食",occupationId:"OC57",occupation:"調理・キッチン",specializedOccupationId:"SO165",specializedOccupation:"フードコーディネーター" },
+  { careerAreaId:"CA10",careerArea:"食品・飲食",occupationGroupId:"OG25",occupationGroup:"飲食・外食",occupationId:"OC58",occupation:"飲食店管理・SV",specializedOccupationId:"SO166",specializedOccupation:"飲食店舗マネージャー（店長）" },
+  { careerAreaId:"CA10",careerArea:"食品・飲食",occupationGroupId:"OG25",occupationGroup:"飲食・外食",occupationId:"OC58",occupation:"飲食店管理・SV",specializedOccupationId:"SO167",specializedOccupation:"飲食チェーンSV（スーパーバイザー）" },
+  { careerAreaId:"CA11",careerArea:"官公庁・公共",occupationGroupId:"OG26",occupationGroup:"行政・公務",occupationId:"OC59",occupation:"国家公務員",specializedOccupationId:"SO168",specializedOccupation:"国家公務員一般職・総合職" },
+  { careerAreaId:"CA11",careerArea:"官公庁・公共",occupationGroupId:"OG26",occupationGroup:"行政・公務",occupationId:"OC59",occupation:"国家公務員",specializedOccupationId:"SO169",specializedOccupation:"国家専門職（国税・労基・外交官）" },
+  { careerAreaId:"CA11",careerArea:"官公庁・公共",occupationGroupId:"OG26",occupationGroup:"行政・公務",occupationId:"OC60",occupation:"地方公務員",specializedOccupationId:"SO170",specializedOccupation:"都道府県・市区町村職員" },
+  { careerAreaId:"CA11",careerArea:"官公庁・公共",occupationGroupId:"OG26",occupationGroup:"行政・公務",occupationId:"OC60",occupation:"地方公務員",specializedOccupationId:"SO171",specializedOccupation:"消防士・警察官" },
+  { careerAreaId:"CA11",careerArea:"官公庁・公共",occupationGroupId:"OG27",occupationGroup:"公共・団体",occupationId:"OC61",occupation:"独立行政法人・公益法人",specializedOccupationId:"SO172",specializedOccupation:"独立行政法人研究員・職員" },
+  { careerAreaId:"CA11",careerArea:"官公庁・公共",occupationGroupId:"OG27",occupationGroup:"公共・団体",occupationId:"OC61",occupation:"独立行政法人・公益法人",specializedOccupationId:"SO173",specializedOccupation:"公益財団・NPO職員" },
+  { careerAreaId:"CA11",careerArea:"官公庁・公共",occupationGroupId:"OG27",occupationGroup:"公共・団体",occupationId:"OC62",occupation:"教育行政・福祉行政",specializedOccupationId:"SO174",specializedOccupation:"社会福祉士・生活保護担当" },
+  { careerAreaId:"CA11",careerArea:"官公庁・公共",occupationGroupId:"OG27",occupationGroup:"公共・団体",occupationId:"OC62",occupation:"教育行政・福祉行政",specializedOccupationId:"SO175",specializedOccupation:"学校事務・教育委員会職員" },
+  { careerAreaId:"CA12",careerArea:"商社",occupationGroupId:"OG28",occupationGroup:"商社営業・トレーディング",occupationId:"OC63",occupation:"総合商社営業",specializedOccupationId:"SO176",specializedOccupation:"資源・エネルギートレーダー" },
+  { careerAreaId:"CA12",careerArea:"商社",occupationGroupId:"OG28",occupationGroup:"商社営業・トレーディング",occupationId:"OC63",occupation:"総合商社営業",specializedOccupationId:"SO177",specializedOccupation:"プラント・インフラ海外事業営業" },
+  { careerAreaId:"CA12",careerArea:"商社",occupationGroupId:"OG28",occupationGroup:"商社営業・トレーディング",occupationId:"OC64",occupation:"専門商社営業",specializedOccupationId:"SO178",specializedOccupation:"専門商社営業（IT・食品・化学・鉄鋼等）" },
+  { careerAreaId:"CA12",careerArea:"商社",occupationGroupId:"OG28",occupationGroup:"商社営業・トレーディング",occupationId:"OC64",occupation:"専門商社営業",specializedOccupationId:"SO179",specializedOccupation:"仕入れ・バイヤー（商社）" },
+  { careerAreaId:"CA12",careerArea:"商社",occupationGroupId:"OG29",occupationGroup:"商社企画・管理",occupationId:"OC65",occupation:"トレードファイナンス・事業企画",specializedOccupationId:"SO180",specializedOccupation:"トレードファイナンス担当" },
+  { careerAreaId:"CA12",careerArea:"商社",occupationGroupId:"OG29",occupationGroup:"商社企画・管理",occupationId:"OC65",occupation:"トレードファイナンス・事業企画",specializedOccupationId:"SO181",specializedOccupation:"商社事業企画・新規事業開発" },
+  { careerAreaId:"CA13",careerArea:"不動産・建設",occupationGroupId:"OG30",occupationGroup:"不動産営業・開発",occupationId:"OC66",occupation:"不動産営業・仲介",specializedOccupationId:"SO182",specializedOccupation:"不動産売買仲介営業（宅建士）" },
+  { careerAreaId:"CA13",careerArea:"不動産・建設",occupationGroupId:"OG30",occupationGroup:"不動産営業・開発",occupationId:"OC66",occupation:"不動産営業・仲介",specializedOccupationId:"SO183",specializedOccupation:"不動産賃貸仲介営業" },
+  { careerAreaId:"CA13",careerArea:"不動産・建設",occupationGroupId:"OG30",occupationGroup:"不動産営業・開発",occupationId:"OC67",occupation:"不動産開発・用地仕入",specializedOccupationId:"SO184",specializedOccupation:"不動産デベロッパー（用地取得）" },
+  { careerAreaId:"CA13",careerArea:"不動産・建設",occupationGroupId:"OG30",occupationGroup:"不動産営業・開発",occupationId:"OC67",occupation:"不動産開発・用地仕入",specializedOccupationId:"SO185",specializedOccupation:"不動産企画・事業開発担当" },
+  { careerAreaId:"CA13",careerArea:"不動産・建設",occupationGroupId:"OG31",occupationGroup:"不動産運用・管理",occupationId:"OC68",occupation:"プロパティ・アセット管理",specializedOccupationId:"SO186",specializedOccupation:"プロパティマネージャー（PM）" },
+  { careerAreaId:"CA13",careerArea:"不動産・建設",occupationGroupId:"OG31",occupationGroup:"不動産運用・管理",occupationId:"OC68",occupation:"プロパティ・アセット管理",specializedOccupationId:"SO187",specializedOccupation:"アセットマネージャー（AM）" },
+  { careerAreaId:"CA13",careerArea:"不動産・建設",occupationGroupId:"OG32",occupationGroup:"建設・施工",occupationId:"OC69",occupation:"施工管理",specializedOccupationId:"SO188",specializedOccupation:"建築施工管理技士（一般建築）" },
+  { careerAreaId:"CA13",careerArea:"不動産・建設",occupationGroupId:"OG32",occupationGroup:"建設・施工",occupationId:"OC69",occupation:"施工管理",specializedOccupationId:"SO189",specializedOccupation:"土木施工管理技士（インフラ）" },
+  { careerAreaId:"CA13",careerArea:"不動産・建設",occupationGroupId:"OG32",occupationGroup:"建設・施工",occupationId:"OC70",occupation:"設計・積算",specializedOccupationId:"SO190",specializedOccupation:"建築設計士（意匠・構造）" },
+  { careerAreaId:"CA13",careerArea:"不動産・建設",occupationGroupId:"OG32",occupationGroup:"建設・施工",occupationId:"OC70",occupation:"設計・積算",specializedOccupationId:"SO191",specializedOccupation:"設備設計・積算担当" },
+  { careerAreaId:"CA14",careerArea:"小売・流通",occupationGroupId:"OG33",occupationGroup:"店舗・販売",occupationId:"OC71",occupation:"販売スタッフ・店長",specializedOccupationId:"SO192",specializedOccupation:"小売店販売スタッフ・店長" },
+  { careerAreaId:"CA14",careerArea:"小売・流通",occupationGroupId:"OG33",occupationGroup:"店舗・販売",occupationId:"OC71",occupation:"販売スタッフ・店長",specializedOccupationId:"SO193",specializedOccupation:"アパレル販売スタッフ・ショップマネージャー" },
+  { careerAreaId:"CA14",careerArea:"小売・流通",occupationGroupId:"OG34",occupationGroup:"商品企画・MD",occupationId:"OC72",occupation:"バイヤー・MD",specializedOccupationId:"SO194",specializedOccupation:"バイヤー・仕入れ担当" },
+  { careerAreaId:"CA14",careerArea:"小売・流通",occupationGroupId:"OG34",occupationGroup:"商品企画・MD",occupationId:"OC72",occupation:"バイヤー・MD",specializedOccupationId:"SO195",specializedOccupation:"マーチャンダイザー（MD）・VMD" },
+  { careerAreaId:"CA14",careerArea:"小売・流通",occupationGroupId:"OG34",occupationGroup:"商品企画・MD",occupationId:"OC73",occupation:"店舗開発・エリアSV",specializedOccupationId:"SO196",specializedOccupation:"スーパーバイザー・エリアマネージャー" },
+  { careerAreaId:"CA14",careerArea:"小売・流通",occupationGroupId:"OG34",occupationGroup:"商品企画・MD",occupationId:"OC73",occupation:"店舗開発・エリアSV",specializedOccupationId:"SO197",specializedOccupation:"店舗開発・FC開発担当" },
+  { careerAreaId:"CA14",careerArea:"小売・流通",occupationGroupId:"OG35",occupationGroup:"EC・デジタル流通",occupationId:"OC74",occupation:"EC・通販運営",specializedOccupationId:"SO198",specializedOccupation:"ECサイト運営・通販MD" },
+  { careerAreaId:"CA14",careerArea:"小売・流通",occupationGroupId:"OG35",occupationGroup:"EC・デジタル流通",occupationId:"OC74",occupation:"EC・通販運営",specializedOccupationId:"SO199",specializedOccupation:"ECカスタマーサービス・フルフィルメント管理" },
+];
 
 /* ============================================================
    設問フロー定義
@@ -309,8 +514,11 @@ const AREA_ACTIONS = {
    アプリケーション状態
 ============================================================ */
 const state = {
+  sessionId: '',     // UUID（ページロード時に生成）
   userInfo: {
-    name: '', email: '', job: '', industry: '', size: '', company: '',
+    name: '', email: '',
+    careerArea: '', occupationGroup: '', occupation: '', specializedOccupation: '', jobFreeword: '',
+    industry: '', size: '', company: '',
   },
   currentStep: 0,
   answers: {},       // { Q1: 3, Q2: 5, ... }
@@ -514,44 +722,75 @@ async function sendToGAS(payload, retryCount = 0) {
   }
 }
 
-/** スプレッドシートへ送るデータを組み立て */
+/** 第1送信ペイロード（設問画面遷移時・離脱データ） */
+function buildInitialGASPayload() {
+  const u = state.userInfo;
+  return {
+    type: 'initial',
+    sessionId:          state.sessionId,
+    status:             '離脱',
+    dropoffPoint:       '設問画面遷移',
+    startedAt:          new Date().toISOString(),
+    name:               u.name,
+    email:              u.email,
+    careerArea:         u.careerArea,
+    occupationGroup:    u.occupationGroup,
+    occupation:         u.occupation,
+    specializedOccupation: u.specializedOccupation,
+    jobFreeword:        u.jobFreeword,
+    industry:           u.industry,
+    size:               u.size,
+    company:            u.company,
+  };
+}
+
+/** 第2送信ペイロード（結果画面表示時・完了データ） */
 function buildGASPayload(reportRequested = false) {
+  const u = state.userInfo;
   const q = state.answers;
   const dq = state.quantData;
   return {
-    timestamp: new Date().toISOString(),
-    name: state.userInfo.name,
-    email: state.userInfo.email,
-    job: state.userInfo.job,
-    industry: state.userInfo.industry,
-    size: state.userInfo.size,
-    company: state.userInfo.company,
-    totalScore: state.totalScore,
-    stage: state.stage?.name,
-    scoreLeadership: state.areaScores.leadership,
-    scoreManager:    state.areaScores.manager,
-    scoreCulture:    state.areaScores.culture,
-    scoreSystem:     state.areaScores.system,
-    scoreIndividual: state.areaScores.individual,
-    scoreData:       state.areaScores.data,
+    type: 'complete',
+    sessionId:          state.sessionId,
+    status:             '完了',
+    dropoffPoint:       '結果画面表示済み',
+    completedAt:        new Date().toISOString(),
+    name:               u.name,
+    email:              u.email,
+    careerArea:         u.careerArea,
+    occupationGroup:    u.occupationGroup,
+    occupation:         u.occupation,
+    specializedOccupation: u.specializedOccupation,
+    jobFreeword:        u.jobFreeword,
+    industry:           u.industry,
+    size:               u.size,
+    company:            u.company,
+    totalScore:         state.totalScore,
+    stage:              state.stage?.name,
+    scoreLeadership:    state.areaScores.leadership,
+    scoreManager:       state.areaScores.manager,
+    scoreCulture:       state.areaScores.culture,
+    scoreSystem:        state.areaScores.system,
+    scoreIndividual:    state.areaScores.individual,
+    scoreData:          state.areaScores.data,
     // 個別回答
-    Q1: q.Q1, Q2: q.Q2, Q3: q.Q3, Q4: q.Q4, Q5: q.Q5,
-    Q6: q.Q6, Q7: q.Q7, Q8: q.Q8, Q9: q.Q9, Q10: q.Q10,
+    Q1: q.Q1,  Q2: q.Q2,  Q3: q.Q3,  Q4: q.Q4,  Q5: q.Q5,
+    Q6: q.Q6,  Q7: q.Q7,  Q8: q.Q8,  Q9: q.Q9,  Q10: q.Q10,
     Q11: q.Q11, Q12: q.Q12, Q13: q.Q13, Q14: q.Q14, Q15: q.Q15,
     Q16: q.Q16, Q17: q.Q17, Q18: q.Q18, Q19: q.Q19,
     Q20: q.Q20, Q21: q.Q21, Q22: q.Q22, Q23: q.Q23,
     Q24: q.Q24, Q25: q.Q25, Q26: q.Q26,
     // 定量データ
-    dq1Freq:          dq.dq1_freq        ?? '',
-    dq1Rate:          dq.dq1_rate        ?? '',
-    dq2RecruitRate:   dq.dq2_recruit_rate ?? '',
-    dq2ApplyRate:     dq.dq2_apply_rate  ?? '',
-    dq3TrainingRate:  dq.dq3_training_rate ?? '',
-    dq4CareerTalk:    dq.dq4_career_talk_rate ?? '',
-    dq5SideCount:     dq.dq5_side_count  ?? '',
-    dq5SideRate:      dq.dq5_side_rate   ?? '',
-    dq6Engagement:    dq.dq6_engagement  ?? '',
-    dq6Turnover:      dq.dq6_turnover    ?? '',
+    dq1Freq:         dq.dq1_freq             ?? '',
+    dq1Rate:         dq.dq1_rate             ?? '',
+    dq2RecruitRate:  dq.dq2_recruit_rate     ?? '',
+    dq2ApplyRate:    dq.dq2_apply_rate       ?? '',
+    dq3TrainingRate: dq.dq3_training_rate    ?? '',
+    dq4CareerTalk:   dq.dq4_career_talk_rate ?? '',
+    dq5SideCount:    dq.dq5_side_count       ?? '',
+    dq5SideRate:     dq.dq5_side_rate        ?? '',
+    dq6Engagement:   dq.dq6_engagement       ?? '',
+    dq6Turnover:     dq.dq6_turnover         ?? '',
     reportRequested,
   };
 }
@@ -952,6 +1191,127 @@ function setupShareLinks() {
 }
 
 /* ============================================================
+   職種4階層連動プルダウン
+============================================================ */
+const FREEWORD_VALUE = '__FREEWORD__';
+const FREEWORD_LABEL = '該当する職種が見つからない';
+
+function _uniqueList(key, filter = () => true) {
+  const seen = new Set();
+  return OCCUPATION_TAXONOMY.filter(filter).reduce((acc, t) => {
+    if (!seen.has(t[key])) { seen.add(t[key]); acc.push(t[key]); }
+    return acc;
+  }, []);
+}
+
+function _buildOptions(select, values) {
+  select.innerHTML = '<option value="">選択してください</option>';
+  values.forEach(v => {
+    const opt = document.createElement('option');
+    opt.value = v;
+    opt.textContent = v;
+    select.appendChild(opt);
+  });
+  const fw = document.createElement('option');
+  fw.value = FREEWORD_VALUE;
+  fw.textContent = FREEWORD_LABEL;
+  select.appendChild(fw);
+}
+
+function _showWrap(id) { document.getElementById(id).hidden = false; }
+function _hideWrap(id) { document.getElementById(id).hidden = true; }
+function _resetSelect(id) {
+  const el = document.getElementById(id);
+  if (el) el.innerHTML = '<option value="">選択してください</option>';
+}
+
+function _showFreeword() {
+  _showWrap('field-jobFreeword-wrap');
+  checkFormReady();
+}
+function _hideFreeword() {
+  _hideWrap('field-jobFreeword-wrap');
+  document.getElementById('field-jobFreeword').value = '';
+}
+
+function setupOccupationCascade() {
+  const caSelect = document.getElementById('field-careerArea');
+  const ogSelect = document.getElementById('field-occupationGroup');
+  const ocSelect = document.getElementById('field-occupation');
+  const soSelect = document.getElementById('field-specializedOccupation');
+  const fwInput  = document.getElementById('field-jobFreeword');
+
+  // キャリア領域の初期選択肢を構築
+  _buildOptions(caSelect, _uniqueList('careerArea'));
+
+  // ── キャリア領域 変更 ──
+  caSelect.addEventListener('change', () => {
+    const val = caSelect.value;
+    _hideFreeword();
+    _hideWrap('field-occupationGroup-wrap');
+    _hideWrap('field-occupation-wrap');
+    _hideWrap('field-specializedOccupation-wrap');
+    _resetSelect('field-occupationGroup');
+    _resetSelect('field-occupation');
+    _resetSelect('field-specializedOccupation');
+
+    if (!val) { checkFormReady(); return; }
+    if (val === FREEWORD_VALUE) { _showFreeword(); return; }
+
+    _buildOptions(ogSelect, _uniqueList('occupationGroup', t => t.careerArea === val));
+    _showWrap('field-occupationGroup-wrap');
+    checkFormReady();
+  });
+
+  // ── 職種グループ 変更 ──
+  ogSelect.addEventListener('change', () => {
+    const caVal = caSelect.value;
+    const val = ogSelect.value;
+    _hideFreeword();
+    _hideWrap('field-occupation-wrap');
+    _hideWrap('field-specializedOccupation-wrap');
+    _resetSelect('field-occupation');
+    _resetSelect('field-specializedOccupation');
+
+    if (!val) { checkFormReady(); return; }
+    if (val === FREEWORD_VALUE) { _showFreeword(); return; }
+
+    _buildOptions(ocSelect, _uniqueList('occupation', t => t.careerArea === caVal && t.occupationGroup === val));
+    _showWrap('field-occupation-wrap');
+    checkFormReady();
+  });
+
+  // ── 職種 変更 ──
+  ocSelect.addEventListener('change', () => {
+    const caVal = caSelect.value;
+    const ogVal = ogSelect.value;
+    const val = ocSelect.value;
+    _hideFreeword();
+    _hideWrap('field-specializedOccupation-wrap');
+    _resetSelect('field-specializedOccupation');
+
+    if (!val) { checkFormReady(); return; }
+    if (val === FREEWORD_VALUE) { _showFreeword(); return; }
+
+    _buildOptions(soSelect, _uniqueList('specializedOccupation',
+      t => t.careerArea === caVal && t.occupationGroup === ogVal && t.occupation === val));
+    _showWrap('field-specializedOccupation-wrap');
+    checkFormReady();
+  });
+
+  // ── 専門職種 変更 ──
+  soSelect.addEventListener('change', () => {
+    const val = soSelect.value;
+    if (val === FREEWORD_VALUE) { _showFreeword(); }
+    else { _hideFreeword(); }
+    checkFormReady();
+  });
+
+  // ── フリーワード入力 ──
+  fwInput.addEventListener('input', checkFormReady);
+}
+
+/* ============================================================
    他社比較レポート希望
 ============================================================ */
 function setupReportRequest() {
@@ -997,42 +1357,58 @@ function downloadPDF() {
    フォームバリデーション
 ============================================================ */
 function validateBasicInfo() {
-  const fields = ['name', 'email', 'job', 'industry', 'size'];
+  const basicFields = ['name', 'email', 'industry', 'size'];
   let valid = true;
 
-  fields.forEach((key) => {
+  basicFields.forEach((key) => {
     const el = document.querySelector(`[data-field="${key}"]`);
     const errEl = document.querySelector(`[data-error="${key}"]`);
     const val = el?.value.trim() ?? '';
-
     let msg = '';
     if (!val) {
       msg = 'この項目は必須です';
     } else if (key === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
       msg = '有効なメールアドレスを入力してください';
     }
-
     if (msg) {
-      el.classList.add('is-error');
+      el?.classList.add('is-error');
       if (errEl) errEl.textContent = msg;
       valid = false;
     } else {
-      el.classList.remove('is-error');
+      el?.classList.remove('is-error');
       if (errEl) errEl.textContent = '';
     }
   });
 
+  // 職種階層バリデーション
+  if (!isJobSelectionComplete()) {
+    valid = false;
+  }
+
   return valid;
+}
+
+/** 職種選択が終端（専門職種 or フリーワード）まで完了しているか */
+function isJobSelectionComplete() {
+  const freewordWrap = document.getElementById('field-jobFreeword-wrap');
+  if (!freewordWrap.hidden) {
+    return document.querySelector('[data-field="jobFreeword"]')?.value.trim() !== '';
+  }
+  const soWrap = document.getElementById('field-specializedOccupation-wrap');
+  if (!soWrap.hidden) {
+    return document.querySelector('[data-field="specializedOccupation"]')?.value.trim() !== '';
+  }
+  return false;
 }
 
 /** 必須フィールドが埋まっているかリアルタイムチェックして開始ボタンを活性化 */
 function checkFormReady() {
-  const required = ['name', 'email', 'job', 'industry', 'size'];
-  const allFilled = required.every((key) => {
+  const basicFields = ['name', 'email', 'industry', 'size'];
+  const allBasicFilled = basicFields.every((key) => {
     const el = document.querySelector(`[data-field="${key}"]`);
     return el?.value.trim() !== '';
   });
-  document.getElementById('btn-start').disabled = !allFilled;
+  document.getElementById('btn-start').disabled = !(allBasicFilled && isJobSelectionComplete());
 }
 
 /* ============================================================
@@ -1063,7 +1439,24 @@ function resetDiagnosis() {
   state.totalScore = 0;
   state.stage = null;
   state.gasSent = false;
-  state.userInfo = { name: '', email: '', job: '', industry: '', size: '', company: '' };
+  state.sessionId = crypto.randomUUID();
+  state.userInfo = {
+    name: '', email: '',
+    careerArea: '', occupationGroup: '', occupation: '', specializedOccupation: '', jobFreeword: '',
+    industry: '', size: '', company: '',
+  };
+
+  // 職種連動プルダウンをリセット
+  ['field-occupationGroup-wrap','field-occupation-wrap','field-specializedOccupation-wrap','field-jobFreeword-wrap'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.hidden = true;
+  });
+  ['field-occupationGroup','field-occupation','field-specializedOccupation'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.innerHTML = '<option value="">選択してください</option>';
+  });
+  const fw = document.getElementById('field-jobFreeword');
+  if (fw) fw.value = '';
 
   // フォームをリセット
   document.getElementById('form-basic-info').reset();
@@ -1084,14 +1477,33 @@ function setupEventListeners() {
     e.preventDefault();
     if (!validateBasicInfo()) return;
 
-    ['name', 'email', 'job', 'industry', 'size', 'company'].forEach((key) => {
+    // 基本フィールド収集
+    ['name', 'email', 'industry', 'size', 'company'].forEach((key) => {
       const el = document.querySelector(`[data-field="${key}"]`);
       state.userInfo[key] = el?.value.trim() ?? '';
     });
 
+    // 職種フィールド収集
+    state.userInfo.careerArea = document.querySelector('[data-field="careerArea"]')?.value ?? '';
+    const freewordWrap = document.getElementById('field-jobFreeword-wrap');
+    if (!freewordWrap.hidden) {
+      state.userInfo.jobFreeword        = document.querySelector('[data-field="jobFreeword"]')?.value.trim() ?? '';
+      state.userInfo.occupationGroup    = '';
+      state.userInfo.occupation         = '';
+      state.userInfo.specializedOccupation = '';
+    } else {
+      state.userInfo.occupationGroup    = document.querySelector('[data-field="occupationGroup"]')?.value ?? '';
+      state.userInfo.occupation         = document.querySelector('[data-field="occupation"]')?.value ?? '';
+      state.userInfo.specializedOccupation = document.querySelector('[data-field="specializedOccupation"]')?.value ?? '';
+      state.userInfo.jobFreeword        = '';
+    }
+
     state.currentStep = 0;
     showScreen('question');
     renderStep();
+
+    // 第1送信（離脱データ）
+    sendToGAS(buildInitialGASPayload());
   });
 
   // 回答ボタン
@@ -1127,7 +1539,12 @@ function setupEventListeners() {
    初期化
 ============================================================ */
 function init() {
+  // セッションID生成（UUID）
+  state.sessionId = crypto.randomUUID();
+
+  setupOccupationCascade();
   setupEventListeners();
+
   // 初期状態では開始ボタンを無効化
   document.getElementById('btn-start').disabled = true;
 }
