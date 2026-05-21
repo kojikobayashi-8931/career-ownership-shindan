@@ -350,19 +350,32 @@ button { cursor: pointer; font-family: inherit; }
   line-height: 1.6;
 }
 
-.form-privacy-note {
+.form-privacy-check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   margin-top: 12px;
-  text-align: center;
+  justify-content: center;
   font-size: 13px;
+  color: var(--color-text-light);
+  cursor: pointer;
 }
 
-.form-privacy-note a {
+.form-privacy-check input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  accent-color: var(--color-accent);
+  cursor: pointer;
+}
+
+.form-privacy-check a {
   color: var(--color-text-light);
   text-decoration: underline;
   text-underline-offset: 2px;
 }
 
-.form-privacy-note a:hover {
+.form-privacy-check a:hover {
   color: var(--color-accent);
 }
 

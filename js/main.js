@@ -1241,8 +1241,11 @@ function setupOccupationCascade() {
   const soSelect = document.getElementById('field-specializedOccupation');
   const fwInput  = document.getElementById('field-jobFreeword');
 
-  // キャリア領域の初期選択肢を構築
-  _buildOptions(caSelect, _uniqueList('careerArea'));
+  // キャリア領域の初期選択肢を構築（「全業種共通」を先頭に固定）
+  const CA_TOP = '全業種共通（営業/管理部門/企画等）';
+  const caList = _uniqueList('careerArea');
+  const caListSorted = [CA_TOP, ...caList.filter(v => v !== CA_TOP)];
+  _buildOptions(caSelect, caListSorted);
 
   // ── キャリア領域 変更 ──
   caSelect.addEventListener('change', () => {
@@ -1408,7 +1411,8 @@ function checkFormReady() {
     const el = document.querySelector(`[data-field="${key}"]`);
     return el?.value.trim() !== '';
   });
-  document.getElementById('btn-start').disabled = !(allBasicFilled && isJobSelectionComplete());
+  const privacyChecked = document.getElementById('privacy-agree')?.checked !== false;
+  document.getElementById('btn-start').disabled = !(allBasicFilled && isJobSelectionComplete() && privacyChecked);
 }
 
 /* ============================================================
@@ -1471,6 +1475,8 @@ function resetDiagnosis() {
 function setupEventListeners() {
   // 基本情報フォーム：リアルタイムバリデーション
   document.getElementById('form-basic-info').addEventListener('input', checkFormReady);
+  // プライバシーポリシー チェックボックス
+  document.getElementById('privacy-agree').addEventListener('change', checkFormReady);
 
   // 診断開始
   document.getElementById('form-basic-info').addEventListener('submit', (e) => {
