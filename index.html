@@ -36,9 +36,20 @@
     <div class="screen__inner screen__inner--narrow">
 
       <div class="top-hero">
-        <div class="top-hero__badge">無料診断ツール</div>
+        <div class="top-hero__badges">
+          <span class="top-hero__badge">無料診断ツール</span>
+          <span class="top-hero__badge top-hero__badge--hr">人事担当者向け</span>
+        </div>
         <h1 class="top-hero__title">キャリアオーナーシップ診断</h1>
-        <p class="top-hero__subtitle">自社の「キャリアオーナーシップ推進環境」を客観的に把握する、人事担当者向け診断です。</p>
+        <p class="top-hero__benefit">
+          自社のキャリア自律支援が、制度・現場・上司・学習機会の観点でどこまで整っているかを可視化します。
+        </p>
+        <ul class="top-hero__checks">
+          <li>6つの観点で推進環境を客観的に数値化</li>
+          <li>業界・規模別の傾向をもとにした段階評価</li>
+          <li>改善すべき領域と具体的な提言をその場で確認</li>
+        </ul>
+        <p class="top-hero__sub">所要時間：約10〜15分 ／ 診断後すぐに結果を表示</p>
       </div>
 
       <div class="top-about">
@@ -65,8 +76,93 @@
         </div>
       </div>
 
+      <!-- 結果サンプルプレビュー -->
+      <div class="top-sample">
+        <p class="top-sample__intro"><span>📊</span> 診断後はこのような結果が表示されます</p>
+        <div class="top-sample__card">
+          <!-- ミニスコアヘッダー -->
+          <div class="top-sample__mini-hero">
+            <span class="top-sample__sample-badge">サンプル</span>
+            <div class="top-sample__mini-score-wrap">
+              <span class="top-sample__mini-label">総合スコア</span>
+              <div class="top-sample__mini-score">72<span>点</span></div>
+            </div>
+            <div class="top-sample__mini-stage">Stage 3 — 実践期</div>
+          </div>
+          <!-- チャート + エリアバー -->
+          <div class="top-sample__body">
+            <div class="top-sample__chart" aria-hidden="true">
+              <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" width="100%" height="auto">
+                <!-- 背景グリッド（100%） -->
+                <polygon points="100,38 153.7,69 153.7,131 100,162 46.3,131 46.3,69" fill="#F5F7FA" stroke="#D0D8E0" stroke-width="1.5"/>
+                <!-- 60% -->
+                <polygon points="100,62.8 132.2,81.4 132.2,118.6 100,137.2 67.8,118.6 67.8,81.4" fill="none" stroke="#E8EDF2" stroke-width="1"/>
+                <!-- 20% -->
+                <polygon points="100,87.6 110.7,93.8 110.7,106.2 100,112.4 89.3,106.2 89.3,93.8" fill="none" stroke="#E8EDF2" stroke-width="1"/>
+                <!-- 軸線 -->
+                <line x1="100" y1="100" x2="100" y2="38" stroke="#D0D8E0" stroke-width="1"/>
+                <line x1="100" y1="100" x2="153.7" y2="69" stroke="#D0D8E0" stroke-width="1"/>
+                <line x1="100" y1="100" x2="153.7" y2="131" stroke="#D0D8E0" stroke-width="1"/>
+                <line x1="100" y1="100" x2="100" y2="162" stroke="#D0D8E0" stroke-width="1"/>
+                <line x1="100" y1="100" x2="46.3" y2="131" stroke="#D0D8E0" stroke-width="1"/>
+                <line x1="100" y1="100" x2="46.3" y2="69" stroke="#D0D8E0" stroke-width="1"/>
+                <!-- データポリゴン（サンプルスコア: 78,65,72,55,80,45） -->
+                <polygon points="100,51.6 134.9,79.9 138.7,122.3 100,134.1 57.1,124.8 75.8,86.1" fill="rgba(45,139,146,0.22)" stroke="#2D8B92" stroke-width="2.5"/>
+                <!-- データポイント -->
+                <circle cx="100"   cy="51.6"  r="4" fill="#2D8B92" stroke="white" stroke-width="2"/>
+                <circle cx="134.9" cy="79.9"  r="4" fill="#2D8B92" stroke="white" stroke-width="2"/>
+                <circle cx="138.7" cy="122.3" r="4" fill="#2D8B92" stroke="white" stroke-width="2"/>
+                <circle cx="100"   cy="134.1" r="4" fill="#2D8B92" stroke="white" stroke-width="2"/>
+                <circle cx="57.1"  cy="124.8" r="4" fill="#2D8B92" stroke="white" stroke-width="2"/>
+                <circle cx="75.8"  cy="86.1"  r="4" fill="#2D8B92" stroke="white" stroke-width="2"/>
+              </svg>
+            </div>
+            <div class="top-sample__areas">
+              <div class="top-sample__area-row">
+                <span class="top-sample__area-name">経営・宣言</span>
+                <div class="top-sample__area-bar"><div style="width:78%"></div></div>
+                <span class="top-sample__area-score">78</span>
+              </div>
+              <div class="top-sample__area-row">
+                <span class="top-sample__area-name">管理職支援</span>
+                <div class="top-sample__area-bar"><div style="width:65%"></div></div>
+                <span class="top-sample__area-score">65</span>
+              </div>
+              <div class="top-sample__area-row">
+                <span class="top-sample__area-name">組織風土</span>
+                <div class="top-sample__area-bar"><div style="width:72%"></div></div>
+                <span class="top-sample__area-score">72</span>
+              </div>
+              <div class="top-sample__area-row">
+                <span class="top-sample__area-name">制度設計</span>
+                <div class="top-sample__area-bar"><div style="width:55%"></div></div>
+                <span class="top-sample__area-score">55</span>
+              </div>
+              <div class="top-sample__area-row">
+                <span class="top-sample__area-name">個人行動</span>
+                <div class="top-sample__area-bar"><div style="width:80%"></div></div>
+                <span class="top-sample__area-score">80</span>
+              </div>
+              <div class="top-sample__area-row">
+                <span class="top-sample__area-name">データ把握</span>
+                <div class="top-sample__area-bar"><div style="width:45%"></div></div>
+                <span class="top-sample__area-score">45</span>
+              </div>
+            </div>
+          </div>
+          <!-- フェードオーバーレイ -->
+          <div class="top-sample__overlay">
+            <p>あなたの組織の実態がスコアで可視化されます</p>
+          </div>
+        </div>
+      </div>
+
       <div class="form-card">
-        <h2 class="form-card__title">基本情報の入力</h2>
+        <h2 class="form-card__title">診断結果の表示・送付先を入力してください</h2>
+        <div class="form-card__info-note">
+          <p>ご入力いただいた情報は、診断結果の提供、結果に関する確認連絡、サービス改善のために利用します。第三者への提供は行いません。</p>
+          <p>診断結果に応じて、改善のヒントや関連情報をご案内する場合があります。</p>
+        </div>
         <p class="form-card__note">
           <span class="required-badge">必須</span>のついた項目は必ずご入力ください。
         </p>
@@ -235,9 +331,6 @@
         </form>
       </div>
 
-      <p class="top-privacy">
-        入力いただいた情報は、診断結果の提供およびNODIAからのご連絡に使用します。第三者への提供はいたしません。
-      </p>
 
     </div>
   </section>
@@ -350,7 +443,7 @@
       <div class="result-chart">
         <h2 class="result-section__title">領域別スコア</h2>
         <div class="result-chart__wrap">
-          <canvas id="radar-chart" width="360" height="360" aria-label="6領域のレーダーチャート"></canvas>
+          <canvas id="radar-chart" width="480" height="480" aria-label="6領域のレーダーチャート"></canvas>
         </div>
         <!-- 領域別スコア一覧 -->
         <div class="area-scores" id="area-scores-list"></div>
