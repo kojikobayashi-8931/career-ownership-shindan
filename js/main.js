@@ -9,6 +9,9 @@
 ============================================================ */
 const GAS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxfwggSq-hS-9qFLbPZ9tFkILZi8xVLNVg6R-nIW8BVzDKPd51y-7-lS5fAek0dKy_d/exec';
 
+/** GASと共有する簡易トークン（機械的スパム対策。GAS側 SHARED_TOKEN と一致させること） */
+const GAS_TOKEN = 'nodia-cos-2026-Kx7mPq3Z';
+
 /* ============================================================
    定数定義
 ============================================================ */
@@ -727,6 +730,7 @@ function buildInitialGASPayload() {
   const u = state.userInfo;
   return {
     type: 'initial',
+    token:              GAS_TOKEN,
     sessionId:          state.sessionId,
     status:             '離脱',
     dropoffPoint:       '設問画面遷移',
@@ -751,6 +755,7 @@ function buildGASPayload(reportRequested = false) {
   const dq = state.quantData;
   return {
     type: 'complete',
+    token:              GAS_TOKEN,
     sessionId:          state.sessionId,
     status:             '完了',
     dropoffPoint:       '結果画面表示済み',
